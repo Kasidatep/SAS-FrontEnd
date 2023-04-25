@@ -1,0 +1,112 @@
+{
+    "announcement":[
+        {
+            "id":1,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"Y",
+            "action":"view"
+        },
+        {
+            "id":2,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"หางาน",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"N",
+            "action":"view"
+        },
+        {
+            "id":3,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทุนการศึกษา",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"Y",
+            "action":"view"
+        },
+        {
+            "id":4,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"N",
+            "action":"view"
+        },
+        {
+            "id":5,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"Y",
+            "action":"view"
+        },
+        {
+            "id":6,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"N",
+            "action":"view"
+        },
+        {
+            "id":7,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"Y",
+            "action":"view"
+        },
+        {
+            "id":8,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"Y",
+            "action":"view"
+        },
+        {
+            "id":9,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"N",
+            "action":"view"
+        },
+        {
+            "id":10,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"N",
+            "action":"view"
+        },
+        {
+            "id":11,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"N",
+            "action":"view"
+        },
+        {
+            "id":12,
+            "title":"Lorem ipsum dolor sit,odi deleniti accusantium laudantium voluptates totam eaque quae?",
+            "catagory":"ทั่วไป",
+            "date":"19 Apr 2023, 06.00",
+            "closedate":"8 May 2023, 18.00",
+            "display":"Y",
+            "action":"view"
+        }
+    ]
+}
