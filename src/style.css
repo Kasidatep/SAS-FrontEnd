@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.test {
+    border: red solid 1px;
+}
+
+body{
+    margin: 0;
+}
