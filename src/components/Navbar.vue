@@ -1,5 +1,6 @@
 <script setup>
-import Search from './icons/Search.vue'
+import { RouterLink } from 'vue-router';
+// scroll navbar
 window.onscroll = function () { scrollFunction() };
 function scrollFunction() {
     if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -13,19 +14,12 @@ function scrollFunction() {
 <template>
     <div class="w-full h-20 bg-[#336699]">
         <div class="px-[5%] flex items-center justify-between w-full h-full">
-            <img src="images/sit_logo.png" class="h-12">
-            <div class="flex gap-4">
-                <Search class="text-white"></Search>
-                <input placeholder="Search..." class="text-lg rounded-lg px-4 w-[20rem] bg-white"> 
-            </div>
+            <RouterLink :to="{name: 'Home'}" ><img src="images/sit_logo.png" class="h-12 cursor-pointer"></RouterLink>
         </div>
     </div>
     <div id="navbar" class="w-full h-20 bg-[#336699] z-50">
         <div class="px-[5%] flex items-center justify-between w-full h-full">
-            <img src="images/sit_logo.png" class="h-12">
-            <div>
-                <input>
-            </div>
+            <RouterLink :to="{name: 'Home'}" ><img src="images/sit_logo.png" class="h-12 cursor-pointer"></RouterLink>
         </div>
     </div>
     <div class="w-full h-20 drop-shadow-lg bg-white">
