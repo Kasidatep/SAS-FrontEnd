@@ -120,6 +120,9 @@ onMounted(async () => {
                     class="border-gray-600 border-8 border-double px-28 py-10 rounded-md  bg-opacity-70 tracking-wider font-bold">
                     No Annoucement!!</div>
             </div>
+            <div v-if="announcements.length !== 0" class="pt-8 flex justify-end">
+                <div class="border-[1px] border-double border-gray-400 w-fit p-2 px-4 bg-[#e9f4fe] bg-opacity-100 rounded-lg">Total Annoucement : {{ announcements.length }}</div>
+            </div>
         </div>
     </div>
 </template>
