@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
-import Detail from '../components/Detail.vue'
-import Content from '../components/Content.vue'
+import AnnouncementDetailView from '../views/AnnouncementDetailView.vue'
+import ContentView from '../views/ContentView.vue'
 import Test from '../views/Test.vue'
 import NotFound from '../views/NotFound.vue'
 const router=createRouter({
@@ -8,16 +8,21 @@ const router=createRouter({
     routes:[
         {
             path:'/',
+            name:'Default',
+            component:ContentView
+        },
+        {
+            path:'/announcement',
             name:'Home',
-            component:Content
+            component:ContentView
         },
         {
-            path:'/:id',
-            name:'announcementDetail',
-            component:Detail
+            path:'/announcement/:id',
+            name:'AnnouncementDetailView',
+            component:AnnouncementDetailView
         },
         {
-            path:'/test',
+            path:'/announcement/test',
             name:'Test',
             component:Test
         },
