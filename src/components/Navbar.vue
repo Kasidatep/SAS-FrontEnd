@@ -17,12 +17,12 @@ function scrollFunction() {
         <div class="px-[5%] flex items-center justify-between w-full h-full">
             <RouterLink :to="{ name: 'Default' }"><img src="../assets/sit_logo.png" class="h-12 cursor-pointer">
             </RouterLink>
-            <!-- <RouterLink :to="{name:'AboutUs'}">
+            <RouterLink :to="{name:'AboutUs'}">
                 <div class="text-xl text-white flex items-center gap-2 cursor-pointer">
                     <Info></Info>
                     <div>About Us</div>
                 </div>
-            </RouterLink> -->
+            </RouterLink>
         </div>
     </div>
     <div id="navbar" class="w-full h-20 bg-[#285481] z-50">
