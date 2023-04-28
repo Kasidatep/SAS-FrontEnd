@@ -3,14 +3,21 @@ import { onMounted, ref, computed, onUpdated } from "vue";
 import { getAnnouncements } from "../composables/fetch";
 import { toLocalDate } from "../composables/date";
 import Search from "../components/icons/Search.vue";
+import Loading from "../components/Loading.vue";
 import { RouterLink } from "vue-router";
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
 const input = ref('')
-
 const announcements = ref([])
+
+const isLoading = ref(true)
+const offloading = () => {
+    isLoading.value = false
+}
+
 onMounted(async () => {
     announcements.value = await getAnnouncements()
+    // setTimeout(offloading,250)
+    offloading()
     // filterAnnouncements.value = announcements.value
 })
 // const filterAnnouncements = computed(()=>{
@@ -21,6 +28,7 @@ onMounted(async () => {
 
 <template>
     <div class="w-full justify-center flex">
+        <Loading v-show="isLoading"/>
         <div class="w-[95%] sm:w-[90%] pt-14 min-h-[72.5vh]">
             <!-- respronsive -->
             <div class="justify-center items-center flex sm:text-4xl text-3xl font-semibold">
@@ -31,12 +39,12 @@ onMounted(async () => {
                     Date/Time shown in Timezone :
                     <span class="text-[#336699] pl-2"> {{ timezone }} </span>
                 </div>
-                <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements.length !== 0">
+                <!-- <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements.length !== 0">
                     <Search></Search>
                     <input placeholder="Search..."
-                        class="text-lg h-10 rounded-lg px-4 w-[23rem] md:w-[13rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee]"
+                        class="text-lg h-10 rounded-lg px-4 w-[23rem] md:w-[13rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer" 
                         v-model.trim="input">
-                </div>
+                </div> -->
             </div>
 
             <!-- phone responsive -->
@@ -59,7 +67,7 @@ onMounted(async () => {
                     <div class="flex items-center"><span class="font-semibold w-28 inline-block">PublishDate </span> {{
                         toLocalDate(announcement.publishDate) }}</div>
                     <div class="flex items-center"><span class="font-semibold w-28 inline-block">CloseDate </span> {{
-                        toLocalDate(announcement.publishDate) }}</div>
+                        toLocalDate(announcement.closeDate) }}</div>
                     <div class="flex justify-between">
                         <div class="w-full">
                             <span class="font-semibold w-28 inline-block">Display</span><span

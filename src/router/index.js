@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
 import AnnouncementDetailView from '../views/AnnouncementDetailView.vue'
 import ContentView from '../views/ContentView.vue'
-import Test from '../views/Test.vue'
 import AboutUs from '../views/AboutView.vue'
 import NotFound from '../views/NotFound.vue'
 const router=createRouter({
