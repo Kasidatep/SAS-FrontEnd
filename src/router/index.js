@@ -13,19 +13,14 @@ const router=createRouter({
             component:ContentView
         },
         {
-            path:'/announcement',
+            path:'/admin/announcement',
             name:'Home',
             component:ContentView
         },
         {
-            path:'/announcement/:id',
+            path:'/admin/announcement/:id',
             name:'AnnouncementDetailView',
             component:AnnouncementDetailView
-        },
-        {
-            path:'/announcement/test',
-            name:'Test',
-            component:Test
         },
         {
             path:'/about-us',
