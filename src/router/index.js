@@ -22,7 +22,7 @@ const router=createRouter({
             component:ContentView
         },
         {
-            path:`${import.meta.env.VITE_BASE_FRONT_PATH}/admin/announcement:id`,
+            path:`${import.meta.env.VITE_BASE_FRONT_PATH}/admin/announcement/:id`,
             name:'AnnouncementDetailView',
             component:AnnouncementDetailView
         },
