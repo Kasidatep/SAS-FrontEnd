@@ -12,17 +12,22 @@ const router=createRouter({
             component:ContentView
         },
         {
-            path:'/admin/announcement',
+            path:`${import.meta.env.VITE_BASE_FRONT_PATH}`,
+            name:'Default',
+            component:ContentView
+        },
+        {
+            path:`${import.meta.env.VITE_BASE_FRONT_PATH}/admin/announcement`,
             name:'Home',
             component:ContentView
         },
         {
-            path:'/admin/announcement/:id',
+            path:`${import.meta.env.VITE_BASE_FRONT_PATH}/admin/announcement:id`,
             name:'AnnouncementDetailView',
             component:AnnouncementDetailView
         },
         {
-            path:'/about-us',
+            path:`${import.meta.env.VITE_BASE_FRONT_PATH}/about-us`,
             name:'AboutUs',
             component:AboutUs
         },
