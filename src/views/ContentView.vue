@@ -6,7 +6,7 @@ import Search from "../components/icons/Search.vue";
 import Loading from "../components/Loading.vue";
 import { RouterLink } from "vue-router";
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-const input = ref('')
+const searchText = ref('')
 const announcements = ref([])
 
 const isLoading = ref(true)
@@ -18,12 +18,12 @@ onMounted(async () => {
     announcements.value = await getAnnouncements()
     // setTimeout(offloading,250)
     offloading()
-    // filterAnnouncements.value = announcements.value
 })
-// const filterAnnouncements = computed(()=>{
-//     return announcements.value.filter(announcement=>announcement.id.includes(input.value))
-// })
-
+const filterAnnouncements = computed(()=>{
+    if(searchText.value.length==0) return announcements?.value
+    return announcements?.value.filter(announcement => announcement.announcementTitle.toLowerCase().includes(searchText.value.toLowerCase()))
+})
+  
 </script>
 
 <template>
@@ -39,16 +39,16 @@ onMounted(async () => {
                     Date/Time shown in Timezone :
                     <span class="text-[#336699] pl-2"> {{ timezone }} </span>
                 </div>
-                <!-- <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements.length !== 0">
+                <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements.length !== 0">
                     <Search></Search>
                     <input placeholder="Search..."
                         class="text-lg h-10 rounded-lg px-4 w-[23rem] md:w-[13rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer" 
-                        v-model.trim="input">
-                </div> -->
+                        v-model.trim="searchText">
+                </div>
             </div>
 
             <!-- phone responsive -->
-            <div v-if="announcements.length !== 0" v-for="(announcement, index) in announcements"
+            <div v-if="announcements.length !== 0" v-for="(announcement, index) in filterAnnouncements"
                 class="border-gray-400 border-solid border-2 rounded-md   bg-[#e9f4fe] md:hidden mb-12 leading-10 mt-8 pb-2">
                 <div class="p-3 px-5 grid grid-flow-row">
                     <div class="flex justify-between items-center ">
@@ -94,7 +94,7 @@ onMounted(async () => {
                 <div class="p-5 px-5 place-content-center grid">Action</div>
             </div>
 
-            <div v-if="announcements.length !== 0" v-for="(announcement, index) in announcements"
+            <div v-if="announcements.length !== 0" v-for="(announcement, index) in filterAnnouncements"
                 :class="index % 2 === 1 ? 'bg-[#e9f4fe]' : 'bg-white'"
                 class="hidden md:grid grid-cols-7 lg:grid-cols-8 xl:grid-cols-12 border-gray-400 border-solid border-x-[1px] border-b-[1px] text-lg">
                 <div class="p-4 px-5 place-content-center grid self-center">{{ index + 1 }}</div>
@@ -129,7 +129,7 @@ onMounted(async () => {
                     No Annoucement!!</div>
             </div>
             <div v-if="announcements.length !== 0" class="pt-8 flex justify-end">
-                <div class="border-[1px] border-double border-gray-400 w-fit p-2 px-4 bg-[#e9f4fe] bg-opacity-100 rounded-lg">Total Annoucement : {{ announcements.length }}</div>
+                <div class="border-[1px] border-double border-gray-400 w-fit p-2 px-4 bg-[#e9f4fe] bg-opacity-100 rounded-lg">Total Annoucement : {{ filterAnnouncements.length }}</div>
             </div>
         </div>
     </div>
