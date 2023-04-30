@@ -16,7 +16,7 @@ const offloading = () => {
 
 onMounted(async () => {
     announcements.value = await getAnnouncements()
-    // setTimeout(offloading,250)
+    setTimeout(offloading,250)
     offloading()
     // filterAnnouncements.value = announcements.value
 })
@@ -28,7 +28,7 @@ onMounted(async () => {
 
 <template>
     <div class="w-full justify-center flex">
-        <Loading v-show="isLoading"/>
+        <!-- <Loading v-show="isLoading"/> -->
         <div class="w-[95%] sm:w-[90%] pt-14 min-h-[72.5vh]">
             <!-- respronsive -->
             <div class="justify-center items-center flex sm:text-4xl text-3xl font-semibold">
