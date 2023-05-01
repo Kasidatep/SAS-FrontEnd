@@ -46,7 +46,7 @@ const filterAnnouncements = computed(() => {
                 <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements?.length > 0">
                     <Search></Search>
                     <input placeholder="Search..."
-                        class="text-lg h-10 rounded-lg px-4 10 w-[14rem] sss:w-[18rem] ss:w-[23rem] md:w-[18rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer"
+                        class="text-lg h-10 rounded-lg px-4 10 w-[14rem] sss:w-[18rem] ss:w-[22rem] md:w-[15rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer"
                         v-model.trim="searchText">
                 </div>
             </div>
