@@ -28,9 +28,9 @@ onMounted(async () => {
 
 <template>
     <div class="w-full justify-center flex">
-        <!-- <Loading v-show="isLoading"/> -->
+        <Loading v-show="isLoading"/>
         <div class="w-[95%] sm:w-[90%] pt-14 min-h-[72.5vh]">
-            <!-- respronsive -->
+            <!-- responsive -->
             <div class="justify-center items-center flex sm:text-4xl text-3xl font-semibold">
                 SIT Annoucement System (SAS)
             </div>
@@ -39,16 +39,16 @@ onMounted(async () => {
                     Date/Time shown in Timezone :
                     <span class="text-[#336699] pl-2"> {{ timezone }} </span>
                 </div>
-                <!-- <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements.length !== 0">
+                <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements?.length !== 0">
                     <Search></Search>
                     <input placeholder="Search..."
                         class="text-lg h-10 rounded-lg px-4 w-[23rem] md:w-[13rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer" 
                         v-model.trim="input">
-                </div> -->
+                </div>
             </div>
 
             <!-- phone responsive -->
-            <div v-if="announcements.length !== 0" v-for="(announcement, index) in announcements"
+            <div v-if="announcements?.length !== 0" v-for="(announcement, index) in announcements"
                 class="border-gray-400 border-solid border-2 rounded-md   bg-[#e9f4fe] md:hidden mb-12 leading-10 mt-8 pb-2">
                 <div class="p-3 px-5 grid grid-flow-row">
                     <div class="flex justify-between items-center ">
@@ -83,7 +83,7 @@ onMounted(async () => {
             </div>
 
             <!-- responsive -->
-            <div v-if="announcements.length !== 0"
+            <div v-if="announcements?.length !== 0"
                 class="hidden md:grid grid-cols-7 lg:grid-cols-8 xl:grid-cols-12 border-gray-400 border-solid border-[1px] rounded-t-md font-semibold text-lg bg-[#336699] text-white">
                 <div class="p-5 px-5 place-content-center grid">No.</div>
                 <div class="p-5 px-5 grid lg:col-span-4 col-span-3">Title</div>
@@ -94,7 +94,7 @@ onMounted(async () => {
                 <div class="p-5 px-5 place-content-center grid">Action</div>
             </div>
 
-            <div v-if="announcements.length !== 0" v-for="(announcement, index) in announcements"
+            <div v-if="announcements?.length !== 0" v-for="(announcement, index) in announcements"
                 :class="index % 2 === 1 ? 'bg-[#e9f4fe]' : 'bg-white'"
                 class="hidden md:grid grid-cols-7 lg:grid-cols-8 xl:grid-cols-12 border-gray-400 border-solid border-x-[1px] border-b-[1px] text-lg">
                 <div class="p-4 px-5 place-content-center grid self-center">{{ index + 1 }}</div>
@@ -122,13 +122,13 @@ onMounted(async () => {
                     </div>
                 </RouterLink>
             </div>
-            <div v-if="announcements.length === 0"
-                class="w-full pt-[11rem] flex items-center justify-center sm:text-3xl text-2xl font-semibold text-red-600">
+            <div v-if="announcements?.length === 0"
+                class="w-full pt-[9.5rem] flex items-center justify-center sm:text-3xl text-2xl font-semibold text-red-600">
                 <div
                     class="border-gray-600 border-8 border-double px-28 py-10 rounded-md  bg-opacity-70 tracking-wider font-bold">
                     No Annoucement!!</div>
             </div>
-            <div v-if="announcements.length !== 0" class="pt-8 flex justify-end">
+            <div v-if="announcements?.length !== 0" class="pt-8 flex justify-end">
                 <div class="border-[1px] border-double border-gray-400 w-fit p-2 px-4 bg-[#e9f4fe] bg-opacity-100 rounded-lg">Total Annoucement : {{ announcements.length }}</div>
             </div>
         </div>

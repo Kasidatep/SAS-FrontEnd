@@ -37,8 +37,8 @@ const showAlert = () => {
 <template>
     <div class="w-full justify-center flex">
         <div class="w-[90%] sm:w-[80%] md:w-[75%] pt-14 min-h-[72.5vh]" >
-            <div class="justify-center items-center flex sm:text-4xl text-3xl font-semibold" v-if="announcement.id!==null && announcement.id!==undefined">
-                SIT Annoucement System (SAS)
+            <div class=" items-center flex sm:text-4xl text-3xl font-semibold" v-if="announcement.id!==null && announcement.id!==undefined">
+                Annoucement Detail:
             </div>
             <div class="w-full flex flex-col mt-12 pb-12 md:text-lg border-gray-500 border-solid border-2 rounded-lg" v-if="announcement.id!==null && announcement.id!==undefined">
                 <div class="w-full flex flex-col md:flex-row px-8 md:px-12 pt-12">
