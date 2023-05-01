@@ -20,7 +20,7 @@ onMounted(async () => {
 const showAlert = () => {
     Swal.fire({
         title: 'Sorry',
-        text: 'The requested page is not available!',
+        text: 'The request page is not available',
         icon: 'warning',
         showCancelButton: false,
         confirmButtonColor: '#3085d6',
@@ -31,6 +31,7 @@ const showAlert = () => {
             router.push({ name: 'Home' })
         }
     })
+    // alert('The request page is not available')
 }
 </script>
  
@@ -45,36 +46,36 @@ const showAlert = () => {
                 v-if="announcement.id !== null && announcement.id !== undefined">
                 <div class="w-full flex flex-col md:flex-row px-8 md:px-12 pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Title</div>
-                    <div class="w-full flex justify-between items-center ">
+                    <div class="w-full flex justify-between items-center ann-title">
                         {{ announcement.announcementTitle }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Category</div>
-                    <div class="w-full flex justify-between items-center ">
+                    <div class="w-full flex justify-between items-center ann-category">
                         {{ announcement.announcementCategory }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Description</div>
-                    <div class="w-full flex justify-between items-center" v-html="announcement.announcementDescription">
+                    <div class="w-full flex justify-between items-center ann-description" v-html="announcement.announcementDescription">
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">PublishDate</div>
-                    <div class="w-full flex justify-between items-center">
+                    <div class="w-full flex justify-between items-center ann-publish-date">
                         {{ toLocalDate(announcement.publishDate) }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">CloseDate</div>
-                    <div class="w-full flex justify-between items-center ">
+                    <div class="ann-close-date w-full flex justify-between items-center ">
                         {{ toLocalDate(announcement.closeDate) }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Display</div>
-                    <div class="w-full flex justify-between items-center "
+                    <div class="ann-display w-full flex justify-between items-center "
                         :class="announcement.announcementDisplay === 'N' ? 'text-red-700' : 'text-green-700'">
                         {{ announcement.announcementDisplay }}
                     </div>
@@ -83,7 +84,7 @@ const showAlert = () => {
             </div>
             <div class="py-8 place-content-left w-fit grid text-lg">
                 <RouterLink :to="{ name: 'Home' }" v-if="announcement.id !== null && announcement.id !== undefined">
-                    <div class="border-red bg-[#3399cc] px-5 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">
+                    <div class="ann-button border-red bg-[#3399cc] px-5 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">
                         &lt; Back
                     </div>
                 </RouterLink>

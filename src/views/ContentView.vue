@@ -35,7 +35,7 @@ const filterAnnouncements = computed(() => {
         <Loading v-show="isLoading" />
         <div class="w-[95%] sm:w-[90%] pt-14 min-h-[72.5vh]">
             <!-- responsive -->
-            <div class="justify-center items-center flex sm:text-4xl text-3xl font-semibold">
+            <div class="text-center sm:text-4xl text-3xl font-semibold">
                 SIT Annoucement System (SAS)
             </div>
             <div class="w-full flex justify-between pt-12 pb-8 items-center flex-col md:flex-row">
@@ -46,7 +46,7 @@ const filterAnnouncements = computed(() => {
                 <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements?.length > 0">
                     <Search></Search>
                     <input placeholder="Search..."
-                        class="text-lg h-10 rounded-lg px-4 w-[23rem] md:w-[13rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer"
+                        class="text-lg h-10 rounded-lg px-4 10 w-[14rem] sss:w-[18rem] ss:w-[23rem] md:w-[18rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer"
                         v-model.trim="searchText">
                 </div>
             </div>
@@ -65,12 +65,12 @@ const filterAnnouncements = computed(() => {
             <div v-if="announcements?.length === 0 || announcements===undefined"
                 class="w-full  flex items-center justify-center sm:text-3xl text-2xl font-semibold text-red-600">
                 <div class="w-full text-center shadow-lg px-28 py-[2.5rem] rounded-md  bg-opacity-70 tracking-wider font-bold">
-                    No Annoucement!!
+                    No Announcements!!
                 </div>
             </div>
 
             <div v-for="(announcement, index) in announcements " v-if="announcements?.length !== 0">
-                <AnnouncementItems :announcement="announcement" :index="index" />
+                <AnnouncementItems :announcement="announcement" :index="index" class="ann-item"/>
             </div>
 
             <div v-if="announcements?.length > 0" class="pt-8 flex justify-end">

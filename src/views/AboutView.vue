@@ -9,13 +9,13 @@ import team from "../assets/data/team.json"
     <div class="w-full min-h-[72.5vh]">
         <div class="w-full pt-16 flex items-center justify-center font-semibold">
             <div class="w-[80%]">
-                <div class="text-3xl w-fullfont-bold text-center h-fit px-24 py-5 rounded-lg">
+                <div class="text-3xl w-fullfont-bold text-center h-fit px-auto md:px-24 py-5 rounded-lg">
                     About Us
                 </div>
                 <div class="w-full flex justify-center">
                     <hr class="w-96">
                 </div>
-                <div class="text-xl w-full font-normal text-center h-fit px-5 lg:px-24 py-5 rounded-lg pb-5">
+                <div class="sss:text-xs ss:text-sm sm:text-xl w-full font-normal text-center h-fit px-5 lg:px-24 py-5 rounded-lg pb-5">
                     Welcome to the SIT Annoucement System (SAS) by
                     <span class="text-[#336699] font-semibold">3J Team's</span>
                     for the INT221 Integrated Information Technology Project I course! In this web pages,
@@ -30,12 +30,12 @@ import team from "../assets/data/team.json"
                         3J Team's
                     </div>
                     <div class="grid gap-5 grid-cols-1 lg:grid-cols-3 justify-between w-full">
-                        <div class="flex lg:flex-col w-full rounded-lg bg-gradient-to-r lg:bg-gradient-to-b from-[#9abee1] bg-opacity-20 shadow-xl overflow-x-scroll md:overflow-hidden mb-4 lg:mb-0"
+                        <div class="flex flex-col ss:flex-row lg:flex-col w-full rounded-lg bg-gradient-to-r lg:bg-gradient-to-b from-[#9abee1] bg-opacity-20 shadow-xl overflow-x-scroll md:overflow-hidden mb-4 lg:mb-0"
                             v-for="(member) in team">
                             <img :src="member.img"
-                                class="rounded-full m-5 border-2 border-[#464b63] shadow-xl w-52 lg:mx-auto lg:w-[80%]">
-                            <div class="flex flex-col">
-                                <div class="text-2xl text-center w-fit lg:w-full pt-5 lg:pt-2 lg:pb-1">{{ member.name }}
+                                class="rounded-full m-5 border-2 border-[#464b63] shadow-xl w-36 sss:w-44 ss:w-52 mx-auto ss:mx-4 lg:mx-auto lg:w-[80%]">
+                            <div class="flex flex-col ">
+                                <div class="w-full text-2xl text-center ss:text-left lg:text-center lg:w-full pt-5 lg:pt-2 lg:pb-1 ">{{ member.name }}
                                 </div>
                                 <div
                                     class="w-full text-left lg:text-center indent-2 font-light pt-4  min-h-[85px] hidden lg:block">
