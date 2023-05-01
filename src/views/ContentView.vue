@@ -69,7 +69,7 @@ const filterAnnouncements = computed(() => {
                 </div>
             </div>
 
-            <div v-for="(announcement, index) in announcements " v-if="announcements?.length !== 0">
+            <div v-for="(announcement, index) in filterAnnouncements " v-if="announcements?.length !== 0">
                 <AnnouncementItems :announcement="announcement" :index="index" class="ann-item"/>
             </div>
 
