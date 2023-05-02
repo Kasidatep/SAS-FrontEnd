@@ -18,20 +18,21 @@ onMounted(async () => {
 })
 
 const showAlert = () => {
-    Swal.fire({
-        title: 'Sorry',
-        text: 'The request page is not available',
-        icon: 'warning',
-        showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'OK'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            router.push({ name: 'Home' })
-        }
-    })
-    // alert('The request page is not available')
+    // Swal.fire({
+    //     title: 'Sorry',
+    //     text: 'The request page is not available',
+    //     icon: 'warning',
+    //     showCancelButton: false,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'OK'
+    // }).then((result) => {
+    //     if (result.isConfirmed) {
+    //         router.push({ name: 'Home' })
+    //     }
+    // })
+    alert('The request page is not available')
+    router.push({ name: 'Home' })
 }
 </script>
  
