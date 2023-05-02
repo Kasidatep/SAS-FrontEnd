@@ -38,16 +38,22 @@ const filterAnnouncements = computed(() => {
             <div class="text-center sm:text-4xl text-3xl font-semibold">
                 SIT Annoucement System (SAS)
             </div>
-            <div class="w-full flex justify-between pt-12 pb-8 items-center flex-col md:flex-row">
+            <div class="w-full flex justify-between pt-12 pb-8 items-center flex-col lg:flex-row">
                 <div class=" font-semibold text-lg text-center md:flex">
                     Date/Time shown in Timezone :
                     <span class="text-[#336699] pl-2"> {{ timezone }} </span>
                 </div>
-                <div class="flex gap-4 items-center pt-8  md:pt-0" v-if="announcements?.length > 0">
-                    <Search></Search>
-                    <input placeholder="Search..."
-                        class="text-lg h-10 rounded-lg px-4 10 w-[14rem] sss:w-[18rem] ss:w-[22rem] md:w-[15rem] lg:w-[25rem] xl:w-[30rem] bg-[#eeeeee] cursor-pointer"
-                        v-model.trim="searchText">
+                <div class="flex  items-center pt-8 pb-0 md:pb-4 lg:pb-0 lg:pt-0 flex-col justify-center md:flex-row gap-4" v-if="announcements?.length > 0">
+                    <div class="flex items-center gap-4">
+                        <Search></Search>
+                        <input placeholder="Search..."
+                            class="text-lg h-10 rounded-lg px-4 10 w-[14rem] sss:w-[17rem] ss:w-[20rem] sm:w-[20rem] md:w-[20rem] lg:w-[15rem] xl:w-[20rem] 2xl:w-[25rem] bg-[#eeeeee] cursor-pointer"
+                            v-model.trim="searchText">
+                    </div>
+                    <div
+                        class="w-fit ann-button   bg-[#3399cc] px-5 py-1.5 rounded-lg text-white cursor-pointer hover:bg-[#336699] text-lg mt-4  md:mt-0">
+                        Add Annoucement
+                    </div>
                 </div>
             </div>
 
@@ -62,19 +68,21 @@ const filterAnnouncements = computed(() => {
                 <div class="p-5 px-5 place-content-center grid">Action</div>
             </div>
 
-            <div v-if="announcements?.length === 0 || announcements===undefined"
+            <div v-if="announcements?.length === 0 || announcements === undefined"
                 class="w-full  flex items-center justify-center sm:text-3xl text-2xl font-semibold text-red-600">
-                <div class="w-full text-center shadow-lg px-28 py-[2.5rem] rounded-md  bg-opacity-70 tracking-wider font-bold">
+                <div
+                    class="w-full text-center shadow-lg px-28 py-[2.5rem] rounded-md  bg-opacity-70 tracking-wider font-bold">
                     No Announcements!!
                 </div>
             </div>
 
             <div v-for="(announcement, index) in announcements " v-if="announcements?.length !== 0">
-                <AnnouncementItems :announcement="announcement" :index="index" class="ann-item"/>
+                <AnnouncementItems :announcement="announcement" :index="index" class="ann-item" />
             </div>
 
             <div v-if="announcements?.length > 0" class="pt-8 flex justify-end">
-                <div class="border-[1px] border-double border-gray-400 w-fit p-2 px-4 bg-[#e9f4fe] bg-opacity-100 rounded-lg">
+                <div
+                    class="border-[1px] border-double border-gray-400 w-fit p-2 px-4 bg-[#e9f4fe] bg-opacity-100 rounded-lg">
                     Total Annoucement : {{ filterAnnouncements?.length }}
                 </div>
             </div>
