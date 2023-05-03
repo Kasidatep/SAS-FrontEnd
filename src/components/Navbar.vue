@@ -14,7 +14,7 @@ function scrollFunction() {
  
 <template>
     <div class="w-full h-20 bg-[#285481]">
-        <div class="px-[5%] flex items-center justify-between w-full h-full">
+        <div class="px-[5%] flex items-center justify-between w-full h-full ">
             <RouterLink :to="{ name: 'Default' }"><img src="../assets/sit_logo.png" class="h-12 cursor-pointer">
             </RouterLink>
             <RouterLink :to="{name:'AboutUs'}">

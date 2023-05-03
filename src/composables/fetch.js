@@ -21,14 +21,50 @@ const getAnnouncementById = async (id) => {
     }
 }
 
-const deleteAnnouncementById = async (id) => {
+
+const createAnnouncement = async (create) => {
     try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${id}`, {
-            method: 'DELETE'
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(create)
         })
         return res.status
-    } catch (error) {
-        console.log(error)
+    }
+    catch (err) {
+        console.log(err)
     }
 }
-export { getAnnouncements, getAnnouncementById }
+
+const updateAnnouncementById = async (edit) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${edit.id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(edit)
+        })
+        return res.status
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+const deleteAnnouncementById = async (deleteId) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${deleteId}`, {
+            method: 'DELETE'
+        })
+        console.log(res.status)
+        return res.status
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+
+export { getAnnouncements, getAnnouncementById, createAnnouncement, updateAnnouncementById, deleteAnnouncementById }
