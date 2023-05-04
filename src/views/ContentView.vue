@@ -41,21 +41,19 @@ const deleteAnnoucement = async (id) => {
     if(status==200){
           // announcements.value = announcements.value.filter(announcement=> announcement.id !== id)
            announcements.value = await getAnnouncements()
-           alert('deleted successfully')
-           router.push({ name: 'Home' })
+           alert('Deleted successfully')
            
     }else{
-        alert('Cannot Delete')
-        router.push({ name: 'Home' })
+        alert('Something wrong, cannot delete')
     }
 }
 
 const showDeleteAlert = async (deleteId) => {
-    await router.push({ name: 'DeleteAnnouncement' , params: {id:deleteId}})
+   // await router.push({ name: 'DeleteAnnouncement' , params: {id:deleteId}})
     if ( confirm('Are you sure to delete?')) {
        deleteAnnoucement(deleteId)
     } else {
-        router.push({ name: 'Home' })
+        alert('OK, reject delete!!.')
     }
 }
 
