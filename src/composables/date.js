@@ -27,8 +27,9 @@
   }
 
   const toDate = (date, time) => {
-    if(date.value==undefined) return null
-    const stringDate = `${date.value} ${time.value}`
+    if(date==null) return null
+    if(time==null) time = '00:00:00'
+    const stringDate = `${date} ${time}`
     const dateObj = new Date(stringDate)
     return dateObj.toISOString()
 }
