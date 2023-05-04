@@ -92,14 +92,22 @@ defineEmits(['deleteAnnoucement'])
                         </div>
                     </div>
                 </RouterLink>
-                <RouterLink :to="{ name: 'Home', params: { id: announcement.id } }" class="flex item-center justify-center">
+                <div class="flex item-center justify-center">
                     <div class=" place-content-center grid self-center">
                         <div class="ann-button  bg-rose-500 hover:bg-rose-700 px-4 py-1 rounded-lg text-white cursor-pointer "
                             @click="$emit('deleteAnnoucement',announcement.id)">
                             Delete
                         </div>
                     </div>
-                </RouterLink>
+                </div>
+                <!-- <RouterLink :to="{ name: 'DeleteAnnouncement', params: { id: announcement.id } }" class="flex item-center justify-center">
+                    <div class=" place-content-center grid self-center">
+                        <div class="ann-button  bg-rose-500 hover:bg-rose-700 px-4 py-1 rounded-lg text-white cursor-pointer "
+                            @click="$emit('deleteAnnoucement',announcement.id)">
+                            Delete
+                        </div>
+                    </div>
+                </RouterLink> -->
             </div>
         </div>
     </div>

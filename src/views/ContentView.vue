@@ -23,6 +23,9 @@ onMounted(async () => {
     announcements.value = await getAnnouncements()
     setTimeout(offloading, 250)
     offloading()
+    if(typeof route.params.id=="Number"){
+        console.log("Num")
+    }
 })
 const filterAnnouncements = computed(() => {
     if (searchText.value.length == 0) return announcements?.value
@@ -35,22 +38,22 @@ const filterAnnouncements = computed(() => {
 
 const deleteAnnoucement = async (id) => { 
     const status = await deleteAnnouncementById(id)
-    console.log(status)
-    if(status.ok){
+    if(status==200){
           // announcements.value = announcements.value.filter(announcement=> announcement.id !== id)
            announcements.value = await getAnnouncements()
+           alert('deleted successfully')
+           router.push({ name: 'Home' })
+           
     }else{
         alert('Cannot Delete')
+        router.push({ name: 'Home' })
     }
 }
 
-const showDeleteAlert = (deleteId) => {
-    console.log(deleteId)
-    router.push({ name: 'DeleteAnnouncement' , params: { id: deleteId}})
-    if (confirm('Are you sure to delete?')) {
-        router.push({ name: 'Home' })
+const showDeleteAlert = async (deleteId) => {
+    await router.push({ name: 'DeleteAnnouncement' , params: {id:deleteId}})
+    if ( confirm('Are you sure to delete?')) {
        deleteAnnoucement(deleteId)
-       alert('deleted successfully')
     } else {
         router.push({ name: 'Home' })
     }
@@ -89,7 +92,7 @@ const showDeleteAlert = (deleteId) => {
                 </div>
             </div>
 
-            <div v-if="announcements?.length !== 0"
+            <div 
                 class="hidden md:grid grid-cols-8 lg:grid-cols-9 xl:grid-cols-12 border-gray-400 border-solid border-[1px] rounded-t-md font-semibold text-lg bg-[#336699] text-white">
                 <div class="p-5 place-content-center grid">No.</div>
                 <div class="p-5  grid lg:col-span-4 col-span-3">Title</div>
