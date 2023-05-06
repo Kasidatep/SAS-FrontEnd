@@ -52,17 +52,18 @@ defineEmits(['deleteAnnoucement'])
                             announcement.announcementCategory }}</span>
                     </div>
                 </div>
-                <div class="pt-3 flex justify-between">
-                    <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }">
-                        <div
-                            class="w-fit ann-button   px-4 py-1  rounded-md bg-[#3399cc] hover:bg-[#336699] text-white text-lg cursor-pointer">
-                            View</div>
-                    </RouterLink>
-                    <RouterLink :to="{ name: 'DeleteAnnouncement', params: { id: announcement.id } }">
-                        <div class="w-fit ann-button   px-4 py-1  rounded-md bg-rose-500 hover:bg-rose-700 text-white text-lg cursor-pointer"
-                            @click="deleteAnnoucement">
-                            Delete</div>
-                    </RouterLink>
+                <div class="pt-3 flex gap-2">
+                        <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }" class="w-full">
+                            <div
+                                class="w-full ann-button text-center  px-4 py-1  rounded-md bg-[#3399cc] hover:bg-[#336699] text-white text-lg cursor-pointer">
+                                View</div>
+                        </RouterLink>
+                        <RouterLink :to="{ name: 'DeleteAnnouncement', params: { id: announcement.id } }">
+                            <div class="w-fit ann-button   px-4 py-1  rounded-md bg-rose-500 hover:bg-rose-700 text-white text-lg cursor-pointer"
+                                @click="deleteAnnoucement">
+                                Delete</div>
+                        </RouterLink>
+                
                 </div>
             </div>
         </div>
@@ -95,19 +96,11 @@ defineEmits(['deleteAnnoucement'])
                 <div class="flex item-center justify-center">
                     <div class=" place-content-center grid self-center">
                         <div class="ann-button  bg-rose-500 hover:bg-rose-700 px-4 py-1 rounded-lg text-white cursor-pointer "
-                            @click="$emit('deleteAnnoucement',announcement.id)">
+                            @click="$emit('deleteAnnoucement', announcement.id)">
                             Delete
                         </div>
                     </div>
                 </div>
-                <!-- <RouterLink :to="{ name: 'DeleteAnnouncement', params: { id: announcement.id } }" class="flex item-center justify-center">
-                    <div class=" place-content-center grid self-center">
-                        <div class="ann-button  bg-rose-500 hover:bg-rose-700 px-4 py-1 rounded-lg text-white cursor-pointer "
-                            @click="$emit('deleteAnnoucement',announcement.id)">
-                            Delete
-                        </div>
-                    </div>
-                </RouterLink> -->
             </div>
         </div>
     </div>
