@@ -59,7 +59,6 @@ const deleteAnnouncementById = async (deleteId) => {
         const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${deleteId}`, {
             method: 'DELETE'
         })
-        console.log(res.status)
         return res.status
     }
     catch (err) {

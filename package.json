@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/tt2/",
     "preview": "vite preview",
     "backend": "json-server --watch ./data/mock-up.json --port 5000",
     "cypress:open": "cypress open"
