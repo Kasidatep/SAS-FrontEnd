@@ -181,7 +181,7 @@ const addAnnouncement = async () => {
       showAlert(
         "success",
         "Successfully",
-        `Your announcement has ${isUpdateState.value ? "updated" : "created"}.`,
+        `Your announcement has been ${isUpdateState.value ? "updated" : "created"}.`,
         false,
         true
       );
@@ -189,9 +189,7 @@ const addAnnouncement = async () => {
       showAlert(
         "error",
         "Sorry",
-        `Your announcement cannot be ${
-          isUpdateState.value ? "update" : "create"
-        }.`,
+        `Your announcement cannot be ${ isUpdateState.value ? "updated" : "created"}.`,
         false,
         true
       );
@@ -202,7 +200,7 @@ const addAnnouncement = async () => {
       toast: true,
       position: "top-end",
       showConfirmButton: false,
-      timer: 1250,
+      timer: 1500,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -212,7 +210,7 @@ const addAnnouncement = async () => {
 
     Toast.fire({
       icon: "warning",
-      title: "Some value cannot be empty",
+      title: `Cannot ${ isUpdateState.value ? "updated" : "created"}.`,
     });
   }
 };
