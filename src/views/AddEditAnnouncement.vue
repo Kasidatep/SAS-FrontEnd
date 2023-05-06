@@ -16,9 +16,9 @@ const route = useRoute()
 const isUpdateState = ref(false)
 const annoucement = ref({})
 
-const announcementTitle = ref('a')
-const announcementCatagory = ref('')
-const announcementDescription = ref('')
+const announcementTitle = ref(null)
+const announcementCatagory = ref(1)
+const announcementDescription = ref(null)
 const publishDate = ref('1999-02-30')
 const publishTime = ref('')
 const closeDate = ref('')
@@ -74,8 +74,7 @@ const addAnnouncement = async () =>{
     const addObj = {
         announcementTitle:announcementTitle.value,
         announcementDescription:announcementDescription.value,
-        publishDate:publishDate.value,
-        publishTime:publishTime.value,
+        publishDate:publishDateTime.value,
         closeDate: closeDateTime.value,
         announcementDisplay:announcementDisplay.value,
         categoryId:announcementCatagory.value,
