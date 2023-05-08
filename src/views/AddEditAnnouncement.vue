@@ -57,15 +57,15 @@ const disabledBtn = computed(() => {
 const isSameValue = computed(() => {
   return announcementTitle.value == announcement.value?.announcementTitle &&
     announcementCatagory.value ==
-      findCategoryId(announcement.value?.announcementCategory) &&
+    findCategoryId(announcement.value?.announcementCategory) &&
     announcementDescription.value ==
-      announcement.value?.announcementDescription &&
+    announcement.value?.announcementDescription &&
     publishDate.value == isoToDate(announcement.value?.publishDate) &&
     publishTime.value == isoToTime(announcement.value?.publishDate) &&
     closeDate.value == isoToDate(announcement.value?.closeDate) &&
     closeTime.value == isoToTime(announcement.value?.closeDate) &&
     announcementDisplay.value ==
-      (announcement.value?.announcementDisplay == "Y")
+    (announcement.value?.announcementDisplay == "Y")
     ? true
     : false;
 });
@@ -177,22 +177,26 @@ const addAnnouncement = async () => {
       addObj.id = id.value;
       status = await updateAnnouncementById(addObj);
     }
-    if (status == 200)
+    if (status == 200){
       showAlert(
         "success",
         "Successfully",
         `Your announcement has been ${isUpdateState.value ? "updated" : "created"}.`,
         false,
-        true
+        false
       );
-    else
+      router.push({name: "Home"})
+    } else{
       showAlert(
         "error",
         "Sorry",
-        `Your announcement cannot be ${ isUpdateState.value ? "updated" : "created"}.`,
+        `Your announcement cannot be ${isUpdateState.value ? "updated" : "created"}.`,
         false,
-        true
+        false
       );
+      router.push({name: "Home"})
+    }
+      
   } else {
     //showAlert('error', 'Sorry', 'Some value cannot be empty', false, false)
 
@@ -210,7 +214,7 @@ const addAnnouncement = async () => {
 
     Toast.fire({
       icon: "warning",
-      title: `Cannot ${ isUpdateState.value ? "updated" : "created"}.`,
+      title: `Cannot ${isUpdateState.value ? "updated" : "created"}.`,
     });
   }
 };
@@ -222,43 +226,27 @@ const addAnnouncement = async () => {
       <div class="pl-2 items-center flex sm:text-3xl text-2xl font-semibold">
         {{ isUpdateState ? "Edit" : "Add" }} Announcement:
       </div>
-      <div
-        class="w-full flex flex-col mt-8 pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg"
-      >
+      <div class="w-full flex flex-col mt-8 pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg">
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-10">
           <div class="flex justify-between">
             <div class="w-fit font-semibold text-lg pb-2">
               Title<span class="text-rose-700 pl-1">*</span>
             </div>
-            <div
-              class="text-xs md:text-sm align-text-bottom pt-3"
-              :class="validateTitle.css"
-            >
+            <div class="text-xs md:text-sm align-text-bottom pt-3" :class="validateTitle.css">
               {{ validateTitle.msg }}
             </div>
           </div>
 
-          <input
-            v-model.trim="announcementTitle"
-            placeholder="หัวเรื่อง"
-            maxlength="200"
-            class="ann-title w-full bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base"
-          />
+          <input v-model.trim="announcementTitle" placeholder="หัวเรื่อง" maxlength="200"
+            class="ann-title w-full bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">
             Catagory<span class="text-rose-700 pl-1">*</span>
           </div>
-          <select
-            v-model="announcementCatagory"
-            class="ann-catagory bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg w-full ss:w-[13rem] px-4 h-12"
-          >
-            <option
-              :value="catagory.id"
-              class=""
-              v-for="catagory in categoryList"
-              :selected="catagory.id == 1"
-            >
+          <select v-model="announcementCatagory"
+            class="ann-category bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg w-full ss:w-[13rem] px-4 h-12">
+            <option :value="catagory.id" class="" v-for="catagory in categoryList" :selected="catagory.id == 1">
               {{ catagory.name }}
             </option>
           </select>
@@ -268,90 +256,63 @@ const addAnnouncement = async () => {
             <div class="w-fit font-semibold text-lg pb-2">
               Description<span class="text-rose-700 pl-1">*</span>
             </div>
-            <div
-              class="text-xs md:text-sm align-text-bottom pt-3"
-              :class="validateDesc.css"
-            >
+            <div class="text-xs md:text-sm align-text-bottom pt-3" :class="validateDesc.css">
               {{ validateDesc.msg }}
             </div>
           </div>
-          <textarea
-            type="text"
-            ref="desc"
-            placeholder="รายละเอียด"
-            maxlength="10000"
+          <textarea type="text" ref="desc" placeholder="รายละเอียด" maxlength="10000"
             class="ann-description w-full rounded-lg pl-5 text-base pt-3 h-48 border border-gray-300 bg-gray-50"
-            v-model.trim="announcementDescription"
-            @keyup.enter="bl.focus()"
-          ></textarea>
+            v-model.trim="announcementDescription" @keyup.enter="bl.focus()"></textarea>
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">Publish Date</div>
           <div class="flex gap-6 flex-col ss:flex-row">
-            <input
-              type="date"
-              v-model.trim="publishDate"
-              class="ann-publish-date w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base"
-            />
-            <input
-              type="time"
-              v-model.trim="publishTime"
-              class="ann-publish-time w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base"
-            />
+            <input type="date" v-model.trim="publishDate"
+              class="ann-publish-date w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
+            <input type="time" v-model.trim="publishTime"
+              class="ann-publish-time w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
           </div>
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">Close Date</div>
           <div class="flex gap-6 flex-col ss:flex-row">
-            <input
-              type="date"
-              v-model.trim="closeDate"
-              class="ann-close-date w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base"
-            />
-            <input
-              type="time"
-              v-model.trim="closeTime"
-              class="ann-close-time w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base"
-            />
+            <input type="date" v-model.trim="closeDate"
+              class="ann-close-date w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
+            <input type="time" v-model.trim="closeTime"
+              class="ann-close-time w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
           </div>
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">Display</div>
           <div>
-            <input
-              type="checkbox"
-              class="ann-display cursor-pointer"
-              id="anndisplay"
-              v-model="announcementDisplay"
-            />
-            <label for="anndisplay" class="pl-2 cursor-pointer"
-              >Check to show this announcement</label
-            >
+            <input type="checkbox" class="ann-display cursor-pointer" id="anndisplay" v-model="announcementDisplay" />
+            <label for="anndisplay" class="pl-2 cursor-pointer">Check to show this announcement</label>
           </div>
         </div>
         <div
           class="w-full flex-row px-4 ss:px-8 md:px-12 pt-8 flex sss:gap-6 justify-between ss:justify-start"
         >
           <div class="place-content-left w-fit grid text-lg">
-            <div
+            <button
               class="ann-button border-red px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer"
               @click="addAnnouncement"
               :class="
                 disabledBtn
-                  ? 'bg-[#919191] bg-opacity-50 disabled'
+                  ? 'bg-[#919191] bg-opacity-50'
                   : 'bg-[#3399cc] hover:bg-[#336699]'
               "
+              :disabled="disabledBtn"
             >
               {{ isUpdateState ? "Edit" : "Add" }}
-            </div>
+            </button>
           </div>
           <div class="place-content-left w-fit grid text-lg">
             <RouterLink :to="{ name: 'Home' }">
-              <div
+              <button
                 class="ann-button border-red bg-rose-500 hover:bg-rose-700 px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer"
               >
                 Cancel
-              </div>
+              </button>
             </RouterLink>
           </div>
         </div>

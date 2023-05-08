@@ -5,7 +5,6 @@ import { RouterLink } from "vue-router";
 import Swal from 'sweetalert2'
 
 
-
 defineProps({
     announcement: Object,
     index: Number
@@ -23,6 +22,43 @@ defineEmits(['deleteAnnoucement'])
  
 <template>
     <div>
+
+        <div :class="index % 2 === 1 ? 'bg-[#e9f4fe]' : 'bg-white'"
+            class="hidden md:grid grid-cols-8 lg:grid-cols-9 xl:grid-cols-12 border-gray-400 border-solid border-x-[1px] border-b-[1px] text-lg">
+            <div class="p-4  place-content-center grid self-center">{{ index + 1 }}</div>
+            <div class="ann-title p-4 grid lg:col-span-4 col-span-3 self-center">
+                {{ announcement.announcementTitle }}
+            </div>
+            <div class="ann-category p-4  self-center grid">{{ announcement.announcementCategory }}</div>
+            <div class=" p-4 self-center xl:grid col-span-3 hidden grid-cols-4">
+                <div class="ann-publish-date col-span-2">{{ toLocalDate(announcement.publishDate) }}</div>
+                <div class="ann-close-date col-span-2"> {{ toLocalDate(announcement.closeDate) }}</div>
+            </div>
+            <div class="ann-display p-4  place-content-center grid col-span-1"
+                :class="announcement.announcementDisplay === 'N' ? 'text-red-700' : 'text-green-700'">
+                {{ announcement.announcementDisplay }}
+            </div>
+            <div class="flex gap-2 lg:gap-6 justify-center col-span-2 ">
+                <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }"
+                    class="flex item-center justify-center">
+                    <div class="place-content-center grid self-center">
+                        <button
+                            class="ann-button  bg-[#3399cc] px-4 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">
+                            view
+                        </button>
+                    </div>
+                </RouterLink>
+                <div class="flex item-center justify-center">
+                    <div class=" place-content-center grid self-center">
+                        <button class="ann-button  bg-rose-500 hover:bg-rose-700 px-4 py-1 rounded-lg text-white cursor-pointer "
+                            @click="$emit('deleteAnnoucement', announcement.id)">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- phone responsive -->
         <div class="border-gray-400 border-solid border-2 rounded-md   bg-[#e9f4fe] md:hidden mb-12 leading-10 mt-8 pb-2">
             <div class="p-3 px-5 grid grid-flow-row">
@@ -53,53 +89,18 @@ defineEmits(['deleteAnnoucement'])
                     </div>
                 </div>
                 <div class="pt-3 flex gap-2">
-                        <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }" class="w-full">
-                            <div
-                                class="w-full ann-button text-center  px-4 py-1  rounded-md bg-[#3399cc] hover:bg-[#336699] text-white text-lg cursor-pointer">
-                                View</div>
-                        </RouterLink>
-                        <RouterLink :to="{ name: 'DeleteAnnouncement', params: { id: announcement.id } }">
-                            <div class="w-fit ann-button   px-4 py-1  rounded-md bg-rose-500 hover:bg-rose-700 text-white text-lg cursor-pointer"
-                                @click="deleteAnnoucement">
-                                Delete</div>
-                        </RouterLink>
-                
-                </div>
-            </div>
-        </div>
+                    <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }" class="w-full">
+                        <button
+                            class="w-full ann-button text-center  px-4 py-1  rounded-md bg-[#3399cc] hover:bg-[#336699] text-white text-lg cursor-pointer">
+                            View</button>
+                    </RouterLink>
+                    <RouterLink :to="{ name: 'DeleteAnnouncement', params: { id: announcement.id } }">
+                        <button
+                            class="w-fit ann-button   px-4 py-1  rounded-md bg-rose-500 hover:bg-rose-700 text-white text-lg cursor-pointer"
+                            @click="deleteAnnoucement">
+                            Delete</button>
+                    </RouterLink>
 
-        <div :class="index % 2 === 1 ? 'bg-[#e9f4fe]' : 'bg-white'"
-            class="hidden md:grid grid-cols-8 lg:grid-cols-9 xl:grid-cols-12 border-gray-400 border-solid border-x-[1px] border-b-[1px] text-lg">
-            <div class="p-4  place-content-center grid self-center">{{ index + 1 }}</div>
-            <div class="ann-title p-4 grid lg:col-span-4 col-span-3 self-center">
-                {{ announcement.announcementTitle }}
-            </div>
-            <div class="ann-catagory p-4  self-center grid">{{ announcement.announcementCategory }}</div>
-            <div class=" p-4 self-center xl:grid col-span-3 hidden grid-cols-4">
-                <div class="ann-publish-date col-span-2">{{ toLocalDate(announcement.publishDate) }}</div>
-                <div class="ann-close-date col-span-2"> {{ toLocalDate(announcement.closeDate) }}</div>
-            </div>
-            <div class="ann-display p-4  place-content-center grid col-span-1"
-                :class="announcement.announcementDisplay === 'N' ? 'text-red-700' : 'text-green-700'">
-                {{ announcement.announcementDisplay }}
-            </div>
-            <div class="flex gap-2 lg:gap-6 justify-center col-span-2 ">
-                <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }"
-                    class="flex item-center justify-center">
-                    <div class="place-content-center grid self-center">
-                        <div
-                            class="ann-button  bg-[#3399cc] px-4 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">
-                            view
-                        </div>
-                    </div>
-                </RouterLink>
-                <div class="flex item-center justify-center">
-                    <div class=" place-content-center grid self-center">
-                        <div class="ann-button  bg-rose-500 hover:bg-rose-700 px-4 py-1 rounded-lg text-white cursor-pointer "
-                            @click="$emit('deleteAnnoucement', announcement.id)">
-                            Delete
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

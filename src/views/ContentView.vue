@@ -5,6 +5,7 @@ import { getAnnouncements,deleteAnnouncementById } from "../composables/fetch";
 import Search from "../components/icons/Search.vue";
 import Loading from "../components/Loading.vue";
 import AnnouncementItems from "../components/AnnouncementItems.vue";
+import Swal from "sweetalert2";
 
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -50,11 +51,19 @@ const deleteAnnoucement = async (id) => {
 
 const showDeleteAlert = async (deleteId) => {
    // await router.push({ name: 'DeleteAnnouncement' , params: {id:deleteId}})
-    if ( confirm('Are you sure to delete?')) {
-       deleteAnnoucement(deleteId)
-    } else {
-       
-    }
+    
+    Swal.fire({
+        title: 'Do you want to delete?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#10B981',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteAnnoucement(deleteId)
+        }
+    })
 }
 
 </script>
