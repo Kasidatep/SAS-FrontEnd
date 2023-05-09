@@ -10,6 +10,30 @@ const getAnnouncements = async () => {
     }
 }
 
+const getPages = async (mode,page,size) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/page?mode=${mode}&page=${page}&size=${size}`)
+        // const res = await fetch('http://localhost:8080/api/announments')
+        if (res.ok) {
+            return await res.json()
+        } else throw new Error('Error, cannot get announcement data')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const getCategories = async () => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/categories`)
+        // const res = await fetch('http://localhost:8080/api/announments')
+        if (res.ok) {
+            return await res.json()
+        } else throw new Error('Error, cannot get announcement data')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const getAnnouncementById = async (id) => {
     try {
         const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${id}`)
@@ -66,4 +90,4 @@ const deleteAnnouncementById = async (deleteId) => {
     }
 }
 
-export { getAnnouncements, getAnnouncementById, createAnnouncement, updateAnnouncementById, deleteAnnouncementById }
+export { getAnnouncements, getAnnouncementById, createAnnouncement, updateAnnouncementById, deleteAnnouncementById, getCategories, getPages }

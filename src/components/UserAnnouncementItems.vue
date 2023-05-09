@@ -7,53 +7,24 @@ defineProps({
     index: Number
 })
 
-defineEmits(['deleteAnnoucement'])
-
-
-// console.log(typeof route.params?.id)
-// if(route.params?.id!==undefined){
-//     showAlert()
-// }
-
 </script>
  
 <template>
     <div>
 
         <div :class="index % 2 === 1 ? 'bg-[#e9f4fe]' : 'bg-white'"
-            class="hidden md:grid grid-cols-8 lg:grid-cols-9 xl:grid-cols-12 border-gray-400 border-solid border-x-[1px] border-b-[1px] text-lg">
-            <div class="p-4  place-content-center grid self-center">{{ index + 1 }}</div>
-            <div class="ann-title p-4 grid lg:col-span-4 col-span-3 self-center">
-                {{ announcement.announcementTitle }}
+            class="hidden md:grid grid-cols-12 border-gray-400 border-solid border-x-[1px] border-b-[1px] text-lg">
+            <div class="p-4 place-content-center grid self-center">{{ index + 1 }}</div>
+            <div class="ann-title p-4 grid col-span-9 self-center">
+                <RouterLink :to="{ name: 'UserAnnouncementDetail', params: { id: announcement.id } }" class="hover:text-[#336699]">
+                    {{ announcement.announcementTitle }}
+                </RouterLink>
             </div>
-            <div class="ann-category p-4  self-center grid">{{ announcement.announcementCategory }}</div>
-            <div class=" p-4 self-center xl:grid col-span-3 hidden grid-cols-4">
+            <div class="ann-category p-4  col-span-2 self-center grid">{{ announcement.announcementCategory }}</div>
+            <!-- <div class=" p-4 self-center xl:grid col-span-3 hidden grid-cols-4">
                 <div class="ann-publish-date col-span-2">{{ toLocalDate(announcement.publishDate) }}</div>
                 <div class="ann-close-date col-span-2"> {{ toLocalDate(announcement.closeDate) }}</div>
-            </div>
-            <div class="ann-display p-4  place-content-center grid col-span-1"
-                :class="announcement.announcementDisplay === 'N' ? 'text-red-700' : 'text-green-700'">
-                {{ announcement.announcementDisplay }}
-            </div>
-            <div class="flex gap-2 lg:gap-6 justify-center col-span-2 ">
-                <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }"
-                    class="flex item-center justify-center">
-                    <div class="place-content-center grid self-center">
-                        <button
-                            class="ann-button  bg-[#3399cc] px-4 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">
-                            view
-                        </button>
-                    </div>
-                </RouterLink>
-                <div class="flex item-center justify-center">
-                    <div class=" place-content-center grid self-center">
-                        <button class="ann-button  bg-rose-500 hover:bg-rose-700 px-4 py-1 rounded-lg text-white cursor-pointer "
-                            @click="$emit('deleteAnnoucement', announcement.id)">
-                            Delete
-                        </button>
-                    </div>
-                </div>
-            </div>
+            </div> -->
         </div>
 
         <!-- phone responsive -->

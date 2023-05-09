@@ -5,18 +5,26 @@ import AboutUs from '../views/AboutView.vue'
 import NotFound from '../views/NotFound.vue'
 import AddAnnouncement from '../views/AddEditAnnouncement.vue'
 import EditAnnouncement from '../views/AddEditAnnouncement.vue'
+import UserContentView from '../views/UserContentView.vue'
+import UserAnnouncementDetail from '../views/UserAnnouncementDetail.vue'
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
             path: '/',
             name: 'Default',
-            component: ContentView
+            component: UserContentView
         },
         {
             path: `${import.meta.env.VITE_BASE_FRONT_PATH}`,
             name: 'Default',
-            component: ContentView
+            component: UserContentView
+        },
+        {
+            path: `${import.meta.env.VITE_BASE_FRONT_PATH}/announcement`,
+            name: 'UserContentView',
+            component: UserContentView
         },
         {
             path: `${import.meta.env.VITE_BASE_FRONT_PATH}/admin/announcement/add`,
@@ -42,6 +50,11 @@ const router = createRouter({
             path: `${import.meta.env.VITE_BASE_FRONT_PATH}/admin/announcement/:id`,
             name: 'AnnouncementDetailView',
             component: AnnouncementDetailView
+        },
+        {
+            path: `${import.meta.env.VITE_BASE_FRONT_PATH}/announcement/:id`,
+            name: 'UserAnnouncementDetail',
+            component: UserAnnouncementDetail
         },
         {
             path: `${import.meta.env.VITE_BASE_FRONT_PATH}/about-us`,

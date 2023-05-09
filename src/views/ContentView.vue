@@ -103,7 +103,7 @@ const showDeleteAlert = async (deleteId) => {
                 class="hidden md:grid grid-cols-8 lg:grid-cols-9 xl:grid-cols-12 border-gray-400 border-solid border-[1px] rounded-t-md font-semibold text-lg bg-[#336699] text-white">
                 <div class="p-5 place-content-center grid">No.</div>
                 <div class="p-5  grid lg:col-span-4 col-span-3">Title</div>
-                <div class="p-5 ">Catagory</div>
+                <div class="p-5 ">Category</div>
                 <div class="p-5  xl:grid col-span-3 grid-cols-4 hidden">
                     <div class="col-span-2">Publish Date</div>
                     <div class="col-span-2">Close Date</div>

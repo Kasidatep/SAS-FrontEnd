@@ -5,17 +5,13 @@ import {
   getAnnouncementById,
   createAnnouncement,
   updateAnnouncementById,
+  getCategories
 } from "../composables/fetch";
 import annDisplayEnum from "../composables/announcementDisplayEnum";
 import { isoToDate, isoToTime, toDate } from "../composables/date";
 import Swal from "sweetalert2";
 
-const categoryList = [
-  { id: 1, name: "ทั่วไป" },
-  { id: 2, name: "ทุนการศึกษา" },
-  { id: 3, name: "หางาน" },
-  { id: 4, name: "ฝึกงาน" },
-];
+const categoryList = ref([])
 
 const router = useRouter();
 const route = useRoute();
@@ -24,7 +20,7 @@ const isUpdateState = ref(false);
 const announcement = ref(null);
 
 const announcementTitle = ref(null);
-const announcementCatagory = ref(1);
+const announcementCategory = ref(1);
 const announcementDescription = ref(null);
 const publishDate = ref(null);
 const publishTime = ref(null);
@@ -56,7 +52,7 @@ const disabledBtn = computed(() => {
 
 const isSameValue = computed(() => {
   return announcementTitle.value == announcement.value?.announcementTitle &&
-    announcementCatagory.value ==
+    announcementCategory.value ==
     findCategoryId(announcement.value?.announcementCategory) &&
     announcementDescription.value ==
     announcement.value?.announcementDescription &&
@@ -110,7 +106,7 @@ const findCategoryId = (category) =>
 
 const setAnnouncement = () => {
   announcementTitle.value = announcement.value?.announcementTitle;
-  announcementCatagory.value = findCategoryId(
+  announcementCategory.value = findCategoryId(
     announcement.value?.announcementCategory
   );
   announcementDescription.value = announcement.value?.announcementDescription;
@@ -142,6 +138,7 @@ const showAlert = (type, title, desc, cancelButton, goBack) => {
 };
 
 onMounted(async () => {
+  categoryList.value = await getCategories()
   if (typeof route.params.id !== "undefined") {
     isUpdateState.value = true;
     announcement.value = await getAnnouncementById(route.params.id);
@@ -168,7 +165,7 @@ const addAnnouncement = async () => {
       publishDate: publishDateTime.value,
       closeDate: closeDateTime.value,
       announcementDisplay: annDisplay.value,
-      categoryId: announcementCatagory.value,
+      categoryId: announcementCategory.value,
     };
     let status = 400;
     if (isUpdateState.value == false) {
@@ -242,12 +239,12 @@ const addAnnouncement = async () => {
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">
-            Catagory<span class="text-rose-700 pl-1">*</span>
+            Category<span class="text-rose-700 pl-1">*</span>
           </div>
-          <select v-model="announcementCatagory"
+          <select v-model="announcementCategory"
             class="ann-category bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg w-full ss:w-[13rem] px-4 h-12">
-            <option :value="catagory.id" class="" v-for="catagory in categoryList" :selected="catagory.id == 1">
-              {{ catagory.name }}
+            <option :value="category.id" class="" v-for="category in categoryList" :selected="category.id == 1">
+              {{ category.categoryName }}
             </option>
           </select>
         </div>
