@@ -10,9 +10,9 @@ const getAnnouncements = async () => {
     }
 }
 
-const getPages = async (mode,page,size) => {
+const getPages = async (mode,page,size,category) => {
     try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/page?mode=${mode}&page=${page}&size=${size}`)
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/pages?mode=${mode}&page=${page}&size=${size}&category=${category}`)
         // const res = await fetch('http://localhost:8080/api/announments')
         if (res.ok) {
             return await res.json()
