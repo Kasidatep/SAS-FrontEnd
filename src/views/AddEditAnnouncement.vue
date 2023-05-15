@@ -42,11 +42,14 @@ const annDisplay = computed(() => {
 });
 
 const checkError = () => {
-    if(publishDate.value?.length> 0 && new Date(toDate(publishDate.value, publishTime.value)) <= new Date()) showErrorMsg("Publish Date must be a future date")
-    if(closeDate.value?.length> 0 && new Date(toDate(closeDate.value, closeTime.value)) < new Date()) showErrorMsg("The CloseDate must be a future date")
+  if (publishDate.value?.length > 0 && new Date(toDate(publishDate.value, publishTime.value)) <= new Date()) showErrorMsg("The publishDate must be a future date")
+  if (closeDate.value?.length > 0 && new Date(toDate(closeDate.value, closeTime.value)) < new Date()) showErrorMsg("The closeDate must be a future date")
+  if (closeDate.value?.length > 0  && publishDate.value?.length > 0 && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date(toDate(publishDate.value, publishTime.value)))) showErrorMsg("The closeDate must be later than publish date")
+
 }
 
 const disabledBtn = computed(() => {
+  console.log(dateDisabledBtn.value)
   checkError()
   return (
     announcementTitle.value == null ||
@@ -54,29 +57,35 @@ const disabledBtn = computed(() => {
     announcementDescription.value == null ||
     announcementDescription.value?.length == 0 ||
     isSameValue.value ||
-    (new Date(toDate(publishDate.value, publishTime.value)) <= new Date() && publishDate.value != null) ||
-    (new Date(toDate(closeDate.value, closeTime.value)) <= new Date(toDate(publishDate.value, publishTime.value))
-      && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date()
-        && closeDate.value != null)
-    )
+    dateDisabledBtn.value
   );
 });
 
+const dateDisabledBtn = computed(() => {
+  return (
+    // publish date cannot be past
+    ((publishDate.value !== null && publishDate.value?.length != 0) && (new Date(toDate(publishDate.value, publishTime.value)) <= new Date())) || 
+    // close date cannot be past
+    ((closeDate.value !== null && closeDate.value?.length != 0) && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date())) ||
+    ((closeDate.value !== null && closeDate.value?.length != 0) && (publishDate.value !== null && publishDate.value?.length != 0) && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date(toDate(publishDate.value, publishTime.value))))
+    )
+})
+
 const clearPublishDate = () => {
-  if(publishDate.value == ""){
+  if (publishDate.value == "") {
     publishTime.value = ""
   }
-  if(publishDate.value !="" && (publishTime.value == null || publishTime.value == "")){
-    publishTime.value="06:00"
+  if (publishDate.value != "" && (publishTime.value == null || publishTime.value == "")) {
+    publishTime.value = "06:00"
   }
 }
 
 const clearCloseDate = () => {
-  if(closeDate.value == ""){
+  if (closeDate.value == "") {
     closeTime.value = ""
   }
-  if(closeDate.value !="" && (closeTime.value == null || closeTime.value == "")){
-    closeTime.value="18:00"
+  if (closeDate.value != "" && (closeTime.value == null || closeTime.value == "")) {
+    closeTime.value = "18:00"
   }
 }
 
@@ -105,10 +114,10 @@ const isSameValue = computed(() => {
 });
 
 const validateTitle = computed(() => {
-  if (announcementTitle.value?.length == 0 || announcementTitle.value == null){
+  if (announcementTitle.value?.length == 0 || announcementTitle.value == null) {
     return { css: "text-red-500", msg: "not be empty" };
   }
- 
+
   else if (
     announcementTitle.value?.length > 150 &&
     announcementTitle.value?.length < 200
@@ -237,7 +246,7 @@ const addAnnouncement = async () => {
 
   } else {
     //showAlert('error', 'Sorry', 'Some value cannot be empty', false, false)
-
+    // checkError()
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -259,21 +268,22 @@ const addAnnouncement = async () => {
 
 const showErrorMsg = (msg) => {
   const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener("mouseenter", Swal.stopTimer);
-        toast.addEventListener("mouseleave", Swal.resumeTimer);
-      },
-    });
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    width: "30rem",
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
-    Toast.fire({
-      icon: "warning",
-      title: `${msg}`,
-    });
+  Toast.fire({
+    icon: "warning",
+    title: `${msg}`,
+  });
 }
 </script>
 
@@ -349,12 +359,14 @@ const showErrorMsg = (msg) => {
           </div>
         </div>
         <div class="w-full flex-row px-4 ss:px-8 md:px-12 pt-8 flex sss:gap-6 justify-between ss:justify-start">
-          <div class="place-content-left w-fit grid text-lg " >
+          <div class="place-content-left w-fit grid text-lg ">
             <button class="ann-button border-red px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer"
               @click="addAnnouncement" :class="disabledBtn
                 ? 'bg-[#919191] bg-opacity-50 '
                 : 'bg-[#3399cc] hover:bg-[#336699]'
-                " :disabled="disabledBtn">
+                " 
+                :disabled="disabledBtn"
+                >
               {{ isUpdateState ? "Edit" : "Add" }}
             </button>
           </div>

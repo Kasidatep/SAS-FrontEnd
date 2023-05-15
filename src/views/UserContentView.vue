@@ -132,7 +132,7 @@ const showPaginate = computed(()=>{
                 <UserAnnouncementItems :announcement="announcement" :index="getIndex(index)" :mode="annManage.mode"/>
             </div>
 
-            <div v-if="pages?.totalElements > 5" class="pt-12 flex justify-center md:justify-start  px-[10%] md:px-0">
+            <div v-if="pages?.totalElements > 5" class="pt-12 flex justify-center   px-[10%] md:px-0">
                 <button
                     class="ann-page-prev bg-[#336699]  px-5 py-1.5 rounded-tl-lg rounded-bl-lg text-white cursor-pointer text-lg "
                     :class="pages?.first ? 'btn' : ''" @click="pageChange(pages?.page - 1)" :disabled="pages?.first">
@@ -140,23 +140,20 @@ const showPaginate = computed(()=>{
                 </button>
 
 
-                <button class="px-5 py-1.5 bg-[#e9f4fe] cursor-pointer text-lg hidden md:flex"
+                <button class="w-14 justify-center py-1.5 bg-[#e9f4fe] cursor-pointer text-lg hidden md:flex drop-shadow-sm" 
                     :class="`ann-page-${index}`, page-1 == pages?.page ? 'btnfocus' : ''"
                     v-for="(page, index) in showPaginate" :key="index" @click="pageChange(page-1)">
                     {{ page }}
-                </button>
-                <button class="px-5 py-1.5 bg-[#e9f4fe] cursor-pointer text-lg hidden lg:flex" v-if="pages.totalPages > 10 && pages.last == false" >
-                    ...
                 </button>
 
                 <select class="flex justify-center w-full bg-[#e9f4fe] md:hidden" v-model="dropdownPageSelector" @change="pageChange(dropdownPageSelector)">
                     <option v-for="(page, index) in pages.totalPages" :key="index" :value="(page-1)"  class="text-center">
                         {{ page }}
                     </option>
-                </select>
+                </select> 
 
                 <button
-                    class="ann-page-next bg-[#336699]  px-5 py-1.5 rounded-tr-lg rounded-br-lg text-white cursor-pointer text-lg"
+                    class="ann-page-next bg-[#336699] px-5 py-1.5 rounded-tr-lg rounded-br-lg text-white cursor-pointer text-lg"
                     :class="pages?.last ? 'btn' : ''" @click="pageChange(pages?.page + 1)" :disabled="pages?.last" >
                     Next
                 </button>
@@ -175,12 +172,8 @@ const showPaginate = computed(()=>{
 }
 
 .btnfocus {
-    background-color: #336699;
+    background-color: #3399cc;
     color: white;
 }
 
-.btnfo:focus {
-    background-color: #336699;
-    color: white;
-}
 </style>
