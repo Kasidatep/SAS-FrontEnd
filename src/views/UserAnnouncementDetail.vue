@@ -4,6 +4,9 @@ import { useRoute, useRouter } from "vue-router";
 import { getAnnouncementById } from "../composables/fetch";
 import Swal from 'sweetalert2'
 import { toLocalDate } from "../composables/date";
+import { ann } from "../stores/management";
+
+const annManage = ann()
 
 const route = useRoute()
 const id = route.params.id
@@ -51,7 +54,7 @@ const showAlert = () => {
                     <div class="w-full ann-description" v-html="announcement.announcementDescription">
                     </div>
                 </div>
-                <div class="px-4 ss:px-8 md:px-12 pt-5 md:pt-10 flex w-full justify-end">
+                <div class="px-4 ss:px-8 md:px-12 pt-5 md:pt-10 flex w-full justify-end" v-if="annManage.mode == 'close'">
                     <span class="text-rose-500 pr-2">Closed on:</span><span class=" ann-close-date">{{
                         toLocalDate(announcement.closeDate) }}</span>
                 </div>

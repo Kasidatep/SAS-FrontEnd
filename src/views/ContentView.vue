@@ -113,22 +113,15 @@ const showDeleteAlert = async (deleteId) => {
             </div>
 
             <div v-if="announcements?.length === 0 || announcements === undefined"
-                class="w-full  flex items-center justify-center sm:text-3xl text-2xl font-semibold text-red-600">
+                class="w-full  flex items-center justify-center  md:text-2xl sm:text-xl text-lg font-semibold text-red-600">
                 <div
-                    class="w-full text-center shadow-lg px-28 py-[2.5rem] rounded-md  bg-opacity-70 tracking-wider font-bold">
+                    class="w-full text-center shadow-lg px-auto py-[2.5rem] rounded-md  bg-opacity-70 tracking-wider font-bold">
                     No Announcements!!
                 </div>
             </div>
 
             <div v-for="(announcement, index) in filterAnnouncements " v-if="announcements?.length !== 0">
                 <AnnouncementItems :announcement="announcement" @deleteAnnoucement="showDeleteAlert" :index="index" class="ann-item" />
-            </div>
-
-            <div v-if="announcements?.length > 0" class="pt-8 flex justify-end">
-                <div
-                    class="border-[1px] border-double border-gray-400 w-fit p-2 px-4 bg-[#e9f4fe] bg-opacity-100 rounded-lg">
-                    Total Annoucement : {{ filterAnnouncements?.length }}
-                </div>
             </div>
         </div>
     </div>

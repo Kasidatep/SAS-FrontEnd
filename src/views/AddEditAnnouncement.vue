@@ -28,6 +28,7 @@ const closeDate = ref(null);
 const closeTime = ref(null);
 const announcementDisplay = ref(false);
 const id = ref(null);
+
 const publishDateTime = computed(() => {
   return toDate(publishDate.value, publishTime.value);
 });
@@ -40,14 +41,51 @@ const annDisplay = computed(() => {
     : annDisplayEnum.N;
 });
 
+const checkError = () => {
+    if(publishDate.value?.length> 0 && new Date(toDate(publishDate.value, publishTime.value)) <= new Date()) showErrorMsg("Publish Date must be a future date")
+    if(closeDate.value?.length> 0 && new Date(toDate(closeDate.value, closeTime.value)) < new Date()) showErrorMsg("The CloseDate must be a future date")
+}
+
 const disabledBtn = computed(() => {
+  checkError()
   return (
     announcementTitle.value == null ||
     announcementTitle.value?.length == 0 ||
     announcementDescription.value == null ||
     announcementDescription.value?.length == 0 ||
-    isSameValue.value
+    isSameValue.value ||
+    (new Date(toDate(publishDate.value, publishTime.value)) <= new Date() && publishDate.value != null) ||
+    (new Date(toDate(closeDate.value, closeTime.value)) <= new Date(toDate(publishDate.value, publishTime.value))
+      && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date()
+        && closeDate.value != null)
+    )
   );
+});
+
+const clearPublishDate = () => {
+  if(publishDate.value == ""){
+    publishTime.value = ""
+  }
+  if(publishDate.value !="" && (publishTime.value == null || publishTime.value == "")){
+    publishTime.value="06:00"
+  }
+}
+
+const clearCloseDate = () => {
+  if(closeDate.value == ""){
+    closeTime.value = ""
+  }
+  if(closeDate.value !="" && (closeTime.value == null || closeTime.value == "")){
+    closeTime.value="18:00"
+  }
+}
+
+const disabledPublishDate = computed(() => {
+  return publishDate.value == null || publishDate.value.length == 0
+});
+
+const disabledCloseDate = computed(() => {
+  return closeDate.value == null || closeDate.value.length == 0
 });
 
 const isSameValue = computed(() => {
@@ -67,8 +105,10 @@ const isSameValue = computed(() => {
 });
 
 const validateTitle = computed(() => {
-  if (announcementTitle.value?.length == 0 || announcementTitle.value == null)
+  if (announcementTitle.value?.length == 0 || announcementTitle.value == null){
     return { css: "text-red-500", msg: "not be empty" };
+  }
+ 
   else if (
     announcementTitle.value?.length > 150 &&
     announcementTitle.value?.length < 200
@@ -101,8 +141,9 @@ const validateDesc = computed(() => {
   else return { css: "text-green-500", msg: "" };
 });
 
-const findCategoryId = (category) =>
-  categoryList.find((c) => c.name == category)?.id;
+const findCategoryId = (category) => {
+  return categoryList.value.find(c => c.categoryName == category)?.id
+}
 
 const setAnnouncement = () => {
   announcementTitle.value = announcement.value?.announcementTitle;
@@ -174,7 +215,7 @@ const addAnnouncement = async () => {
       addObj.id = id.value;
       status = await updateAnnouncementById(addObj);
     }
-    if (status == 200){
+    if (status == 200) {
       showAlert(
         "success",
         "Successfully",
@@ -182,8 +223,8 @@ const addAnnouncement = async () => {
         false,
         false
       );
-      router.push({name: "Home"})
-    } else{
+      router.push({ name: "Home" })
+    } else {
       showAlert(
         "error",
         "Sorry",
@@ -191,9 +232,9 @@ const addAnnouncement = async () => {
         false,
         false
       );
-      router.push({name: "Home"})
+      router.push({ name: "Home" })
     }
-      
+
   } else {
     //showAlert('error', 'Sorry', 'Some value cannot be empty', false, false)
 
@@ -215,6 +256,25 @@ const addAnnouncement = async () => {
     });
   }
 };
+
+const showErrorMsg = (msg) => {
+  const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "warning",
+      title: `${msg}`,
+    });
+}
 </script>
 
 <template>
@@ -259,24 +319,26 @@ const addAnnouncement = async () => {
           </div>
           <textarea type="text" ref="desc" placeholder="รายละเอียด" maxlength="10000"
             class="ann-description w-full rounded-lg pl-5 text-base pt-3 h-48 border border-gray-300 bg-gray-50"
-            v-model.trim="announcementDescription" @keyup.enter="bl.focus()"></textarea>
+            v-model.trim="announcementDescription"></textarea>
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">Publish Date</div>
           <div class="flex gap-6 flex-col ss:flex-row">
-            <input type="date" v-model.trim="publishDate"
+            <input type="date" v-model.trim="publishDate" @change="clearPublishDate"
               class="ann-publish-date w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
-            <input type="time" v-model.trim="publishTime"
-              class="ann-publish-time w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
+            <input type="time" v-model.trim="publishTime" @change="time"
+              :class="disabledPublishDate ? 'bg-[#919191] bg-opacity-20' : 'bg-gray-50'" :disabled="disabledPublishDate"
+              class="ann-publish-time w-full ss:w-[13rem]  border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
           </div>
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">Close Date</div>
           <div class="flex gap-6 flex-col ss:flex-row">
-            <input type="date" v-model.trim="closeDate"
+            <input type="date" v-model.trim="closeDate" @change="clearCloseDate"
               class="ann-close-date w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
             <input type="time" v-model.trim="closeTime"
-              class="ann-close-time w-full ss:w-[13rem] bg-gray-50 border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
+              :class="disabledCloseDate ? 'bg-[#919191] bg-opacity-20' : 'bg-gray-50'" :disabled="disabledCloseDate"
+              class="ann-close-time w-full ss:w-[13rem]  border border-gray-300 cursor-pointer h-12 rounded-lg px-4 text-base" />
           </div>
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
@@ -286,28 +348,20 @@ const addAnnouncement = async () => {
             <label for="anndisplay" class="pl-2 cursor-pointer">Check to show this announcement</label>
           </div>
         </div>
-        <div
-          class="w-full flex-row px-4 ss:px-8 md:px-12 pt-8 flex sss:gap-6 justify-between ss:justify-start"
-        >
-          <div class="place-content-left w-fit grid text-lg">
-            <button
-              class="ann-button border-red px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer"
-              @click="addAnnouncement"
-              :class="
-                disabledBtn
-                  ? 'bg-[#919191] bg-opacity-50'
-                  : 'bg-[#3399cc] hover:bg-[#336699]'
-              "
-              :disabled="disabledBtn"
-            >
+        <div class="w-full flex-row px-4 ss:px-8 md:px-12 pt-8 flex sss:gap-6 justify-between ss:justify-start">
+          <div class="place-content-left w-fit grid text-lg " >
+            <button class="ann-button border-red px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer"
+              @click="addAnnouncement" :class="disabledBtn
+                ? 'bg-[#919191] bg-opacity-50 '
+                : 'bg-[#3399cc] hover:bg-[#336699]'
+                " :disabled="disabledBtn">
               {{ isUpdateState ? "Edit" : "Add" }}
             </button>
           </div>
           <div class="place-content-left w-fit grid text-lg">
             <RouterLink :to="{ name: 'Home' }">
               <button
-                class="ann-button border-red bg-rose-500 hover:bg-rose-700 px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer"
-              >
+                class="ann-button border-red bg-rose-500 hover:bg-rose-700 px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer">
                 Cancel
               </button>
             </RouterLink>
