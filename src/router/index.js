@@ -13,17 +13,17 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'Default',
+            name: 'Home',
             component: UserContentView
         },
         {
             path: `${import.meta.env.VITE_BASE_FRONT_PATH}`,
-            name: 'Default',
+            name: 'Home',
             component: UserContentView
         },
         {
             path: `${import.meta.env.VITE_BASE_FRONT_PATH}/announcement`,
-            name: 'UserContentView',
+            name: 'UserAnnouncement',
             component: UserContentView
         },
         {
@@ -43,7 +43,7 @@ const router = createRouter({
         },
         {
             path: `${import.meta.env.VITE_BASE_FRONT_PATH}/admin/announcement`,
-            name: 'Home',
+            name: 'AdminAnnouncement',
             component: ContentView
         },
         {

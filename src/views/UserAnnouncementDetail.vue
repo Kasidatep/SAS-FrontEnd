@@ -42,8 +42,11 @@ const showAlert = () => {
 <template>
     <div class="w-full justify-center flex">
         <div class="w-[95%] ss:w-[90%] sm:w-[80%] md:w-[75%] pt-14 min-h-[72.5vh]">
-            <div class="w-full flex flex-col mt-8 pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg"
+            <div class="w-full flex flex-col mt-8 pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg relative"
                 v-if="announcement.id !== null && announcement.id !== undefined">
+                <div class="absolute px-4 ss:px-8 md:px-12 pt-10 right-0 text-emerald-700">
+                    <span class="ann-counter">{{ announcement.announcementView }}</span> Views
+                </div>
                 <div class="w-full px-4 ss:px-8 md:px-12 pt-10">
                     <div class="font-semibold text-2xl pb-2 md:pb-0 ann-title text-center">{{ announcement.announcementTitle
                     }}</div>
@@ -58,10 +61,11 @@ const showAlert = () => {
                     <span class="text-rose-500 pr-2">Closed on:</span><span class=" ann-close-date">{{
                         toLocalDate(announcement.closeDate) }}</span>
                 </div>
+                
             </div>
             <div class="flex gap-6 justify-between ss:justify-start">
                 <div class="py-8 place-content-left w-fit grid text-lg">
-                    <RouterLink :to="{ name: 'UserContentView' }"
+                    <RouterLink :to="{ name: 'UserAnnouncement' }"
                         v-if="announcement.id !== null && announcement.id !== undefined">
                         <div
                             class="ann-button bg-[#3399cc] px-5 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">

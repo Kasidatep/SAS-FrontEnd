@@ -10,6 +10,18 @@ const getAnnouncements = async () => {
     }
 }
 
+const getAnnouncementCount = async (id) => {
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${id}/count`)
+        // const res = await fetch('http://localhost:8080/api/announments')
+        if (res.ok) {
+            return  res.status
+        } else throw new Error('Error, cannot get announcement data')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 const getPages = async (mode,page,size,category) => {
     try {
         const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/pages?mode=${mode}&page=${page}&size=${size}&category=${category}`)
@@ -90,4 +102,4 @@ const deleteAnnouncementById = async (deleteId) => {
     }
 }
 
-export { getAnnouncements, getAnnouncementById, createAnnouncement, updateAnnouncementById, deleteAnnouncementById, getCategories, getPages }
+export { getAnnouncements, getAnnouncementById, createAnnouncement, updateAnnouncementById, deleteAnnouncementById, getCategories, getPages, getAnnouncementCount }

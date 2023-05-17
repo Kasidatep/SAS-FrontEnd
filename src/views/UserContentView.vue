@@ -66,7 +66,6 @@ const showPaginate = computed(()=>{
 
 <template>
     <div class="w-full justify-center flex">
-        <Loading v-show="isLoading" />
 
         <div class="w-[95%] sm:w-[90%] pt-14 min-h-[72.5vh]">
             <!-- responsive -->

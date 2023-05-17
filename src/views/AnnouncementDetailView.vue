@@ -82,11 +82,16 @@ const showAlert = () => {
                         {{ announcement.announcementDisplay }}
                     </div>
                 </div>
-
+                <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
+                    <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Page View</div>
+                    <div class="ann-display w-full flex justify-between items-center text-emerald-700">
+                        {{ announcement.announcementView }}
+                    </div>
+                </div>
             </div>
             <div class="flex gap-6 justify-between ss:justify-start">
                 <div class="py-8 place-content-left w-fit grid text-lg">
-                    <RouterLink :to="{ name: 'Home' }" v-if="announcement.id !== null && announcement.id !== undefined">
+                    <RouterLink :to="{ name: 'AdminAnnouncement' }" v-if="announcement.id !== null && announcement.id !== undefined">
                         <div
                             class="ann-button border-red bg-[#3399cc] px-5 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">
                             Back

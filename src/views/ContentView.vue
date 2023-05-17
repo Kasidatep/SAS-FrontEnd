@@ -24,9 +24,6 @@ onMounted(async () => {
     announcements.value = await getAnnouncements()
     setTimeout(offloading, 250)
     offloading()
-    if(typeof route.params.id=="Number"){
-        console.log("Num")
-    }
 })
 const filterAnnouncements = computed(() => {
     if (searchText.value.length == 0) return announcements?.value
@@ -82,15 +79,14 @@ const showDeleteAlert = async (deleteId) => {
                     Date/Time shown in Timezone :
                     <span class="text-[#336699] pl-2"> {{ timezone }} </span>
                 </div>
-                <div class="flex  items-center pt-8 pb-0 md:pb-4 lg:pb-0 lg:pt-0 flex-col justify-center md:flex-row gap-4"
-                    v-if="announcements?.length > 0">
+                <div class="flex  items-center pt-8 pb-0 md:pb-4 lg:pb-0 lg:pt-0 flex-col justify-center md:flex-row gap-4">
                     <div class="flex items-center gap-4">
                         <Search></Search>
                         <input placeholder="Search..."
                             class="text-lg h-10 rounded-lg px-4 10 w-[14rem] sss:w-[17rem] ss:w-[20rem] sm:w-[20rem] md:w-[20rem] lg:w-[15rem] xl:w-[20rem] 2xl:w-[25rem] bg-[#eeeeee] cursor-pointer"
                             v-model.trim="searchText">
                     </div>
-                    <RouterLink :to="{ name: 'AddAnnouncement' }" v-if="announcements?.length !== 0">
+                    <RouterLink :to="{ name: 'AddAnnouncement' }">
                         <div
                             class="w-fit ann-button   bg-emerald-500 px-5 py-1.5 rounded-lg text-white cursor-pointer hover:bg-emerald-700 text-lg mt-4  md:mt-0">
                             Add Annoucement

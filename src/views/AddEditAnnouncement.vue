@@ -10,6 +10,7 @@ import {
 import annDisplayEnum from "../composables/announcementDisplayEnum";
 import { isoToDate, isoToTime, toDate } from "../composables/date";
 import Swal from "sweetalert2";
+import { QuillEditor } from "@vueup/vue-quill";
 
 const categoryList = ref([])
 
@@ -44,7 +45,7 @@ const annDisplay = computed(() => {
 const checkError = () => {
   if (publishDate.value?.length > 0 && new Date(toDate(publishDate.value, publishTime.value)) <= new Date()) showErrorMsg("The publishDate must be a future date")
   if (closeDate.value?.length > 0 && new Date(toDate(closeDate.value, closeTime.value)) < new Date()) showErrorMsg("The closeDate must be a future date")
-  if (closeDate.value?.length > 0  && publishDate.value?.length > 0 && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date(toDate(publishDate.value, publishTime.value)))) showErrorMsg("The closeDate must be later than publish date")
+  if (closeDate.value?.length > 0 && publishDate.value?.length > 0 && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date(toDate(publishDate.value, publishTime.value)))) showErrorMsg("The closeDate must be later than publish date")
 
 }
 
@@ -64,11 +65,11 @@ const disabledBtn = computed(() => {
 const dateDisabledBtn = computed(() => {
   return (
     // publish date cannot be past
-    ((publishDate.value !== null && publishDate.value?.length != 0) && (new Date(toDate(publishDate.value, publishTime.value)) <= new Date())) || 
+    ((publishDate.value !== null && publishDate.value?.length != 0) && (new Date(toDate(publishDate.value, publishTime.value)) <= new Date())) ||
     // close date cannot be past
     ((closeDate.value !== null && closeDate.value?.length != 0) && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date())) ||
     ((closeDate.value !== null && closeDate.value?.length != 0) && (publishDate.value !== null && publishDate.value?.length != 0) && (new Date(toDate(closeDate.value, closeTime.value)) <= new Date(toDate(publishDate.value, publishTime.value))))
-    )
+  )
 })
 
 const clearPublishDate = () => {
@@ -232,7 +233,7 @@ const addAnnouncement = async () => {
         false,
         false
       );
-      router.push({ name: "Home" })
+      router.push({ name: "AdminAnnouncement" })
     } else {
       showAlert(
         "error",
@@ -241,7 +242,7 @@ const addAnnouncement = async () => {
         false,
         false
       );
-      router.push({ name: "Home" })
+      router.push({ name: "AdminAnnouncement" })
     }
 
   } else {
@@ -327,9 +328,14 @@ const showErrorMsg = (msg) => {
               {{ validateDesc.msg }}
             </div>
           </div>
-          <textarea type="text" ref="desc" placeholder="รายละเอียด" maxlength="10000"
+          <QuillEditor theme="snow" toolbar="full" v-model:content="announcementDescription" content-type="html" class="ann-description text-base pt-3">
+
+          </QuillEditor>
+
+          <!-- <textarea type="text" ref="desc" placeholder="รายละเอียด" maxlength="10000"
             class="ann-description w-full rounded-lg pl-5 text-base pt-3 h-48 border border-gray-300 bg-gray-50"
-            v-model.trim="announcementDescription"></textarea>
+            v-model.trim="announcementDescription">
+          </textarea> -->
         </div>
         <div class="w-full flex flex-col px-4 ss:px-8 md:px-12 pt-8">
           <div class="w-fit font-semibold text-lg pb-2">Publish Date</div>
@@ -364,14 +370,12 @@ const showErrorMsg = (msg) => {
               @click="addAnnouncement" :class="disabledBtn
                 ? 'bg-[#919191] bg-opacity-50 '
                 : 'bg-[#3399cc] hover:bg-[#336699]'
-                " 
-                :disabled="disabledBtn"
-                >
+                " :disabled="disabledBtn">
               {{ isUpdateState ? "Edit" : "Add" }}
             </button>
           </div>
           <div class="place-content-left w-fit grid text-lg">
-            <RouterLink :to="{ name: 'Home' }">
+            <RouterLink :to="{ name: 'AdminAnnouncement' }">
               <button
                 class="ann-button border-red bg-rose-500 hover:bg-rose-700 px-3 sss:px-5 py-1 rounded-lg text-white cursor-pointer">
                 Cancel
