@@ -3,20 +3,20 @@ import { RouterLink } from 'vue-router';
 import Info from './icons/Info.vue'
 import MdiAccountCog from './icons/MdiAccountCog.vue';
 import MdiAccount from './icons/MdiAccount.vue';
+import UisMultiply from './icons/UisMultiply.vue';
+import UisBars from './icons/UisBars.vue';
+
 import { onMounted, ref } from 'vue'
-// scroll navbar
-window.onscroll = function () { scrollFunction() };
-function scrollFunction() {
-    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.getElementById("navbar").style.top = "0";
-    } else {
-        document.getElementById("navbar").style.top = "-100px";
-    }
+
+
+const isOpen = ref(false)
+
+const menuToggle = () => {
+    isOpen.value = !isOpen.value
 }
 
-
-const isOpen = () => {
-
+const closeMenu = () => {
+    isOpen.value = false
 }
 </script>
  
@@ -26,27 +26,28 @@ const isOpen = () => {
             <div class="flex flex-col md:flex-row md:justify-between w-full">
                 <div class="flex justify-between h-20">
                     <div class="my-auto">
-                        <RouterLink :to="{ name: 'Home' }"><img src="../assets/sit_logo.png" class="h-12 cursor-pointer"
-                                @click="userView = true">
+                        <RouterLink :to="{ name: 'Home' }"><img src="../assets/sit_logo.png" class="h-12 cursor-pointer" >
                         </RouterLink>
                     </div>
-                    <div class="flex md:hidden text-xl text-white  gap-2 cursor-pointer pl-6 sss:pl-8 ss:pl-10 sm:pl-12 h-full items-center" @click="isOpen">Menu</div>
+                    <div class="flex md:hidden text-xl text-white  gap-2 cursor-pointer pl-6 sss:pl-8 ss:pl-10 sm:pl-12 h-full items-center" @click="menuToggle()">
+                        <UisMultiply v-show="isOpen" /> <UisBars v-show="!isOpen"/>
+                    </div>
                 </div>
-                <div class="flex flex-col w-full md:w-fit md:flex-row">
-                    <RouterLink :to="{ name: 'UserAnnouncement' }">
+                <div class="flex flex-col w-full md:w-fit md:flex-row" :class="isOpen?'md:flex flex':'md:flex hidden'">
+                    <RouterLink :to="{ name: 'UserAnnouncement' }" @click="closeMenu">
                         <div class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 mx-2 cursor-pointer md:h-full bg-[#33669950] rounded-md md:bg-[#285481]">
                             <MdiAccount></MdiAccount>
                             <div class="">User</div>
                         </div>
                     </RouterLink>
-                    <RouterLink :to="{ name: 'AdminAnnouncement' }">
+                    <RouterLink :to="{ name: 'AdminAnnouncement' }" @click="closeMenu">
                         <div
                             class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 mx-2 cursor-pointer md:h-full bg-[#33669950] rounded-md md:bg-[#285481]">
                             <MdiAccountCog></MdiAccountCog>
                             <div class="">Admin</div>
                         </div>
                     </RouterLink>
-                    <RouterLink :to="{ name: 'AboutUs' }">
+                    <RouterLink :to="{ name: 'AboutUs' }" @click="closeMenu">
                         <div
                             class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 mx-2 cursor-pointer md:h-full bg-[#33669950] rounded-md md:bg-[#285481]">
                             <Info></Info>
