@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getAnnouncementById } from "../composables/fetch";
+import { getAnnouncementByIdCount } from "../composables/fetch";
 import Swal from 'sweetalert2'
 import { toLocalDate } from "../composables/date";
 import { ann } from "../stores/management";
@@ -13,7 +13,7 @@ const id = route.params.id
 const announcement = ref('')
 const router = useRouter()
 onMounted(async () => {
-    announcement.value = await getAnnouncementById(id)
+    announcement.value = await getAnnouncementByIdCount(id)
     if (announcement.value === null || announcement.value === undefined) {
         showAlert()
     }
@@ -45,7 +45,7 @@ const showAlert = () => {
             <div class="w-full flex flex-col mt-8 pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg relative"
                 v-if="announcement.id !== null && announcement.id !== undefined">
                 <div class="absolute px-4 ss:px-8 md:px-12 pt-10 right-0 text-emerald-700">
-                    <span class="ann-counter">{{ announcement.announcementView }}</span> Views
+                    <span class="ann-counter">{{ announcement.viewCount }}</span> Views
                 </div>
                 <div class="w-full px-4 ss:px-8 md:px-12 pt-10">
                     <div class="font-semibold text-2xl pb-2 md:pb-0 ann-title text-center">{{ announcement.announcementTitle

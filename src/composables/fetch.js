@@ -10,13 +10,12 @@ const getAnnouncements = async () => {
     }
 }
 
-const getAnnouncementCount = async (id) => {
+const getAnnouncementByIdCount = async (id) => {
     try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${id}/count`)
-        // const res = await fetch('http://localhost:8080/api/announments')
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/announcements/${id}?count=true`)
         if (res.ok) {
-            return  res.status
-        } else throw new Error('Error, cannot get announcement data')
+            return await res.json()
+        } else throw new Error('Error, cannot get announcement id ' + id)
     } catch (error) {
         console.log(error)
     }
@@ -102,4 +101,4 @@ const deleteAnnouncementById = async (deleteId) => {
     }
 }
 
-export { getAnnouncements, getAnnouncementById, createAnnouncement, updateAnnouncementById, deleteAnnouncementById, getCategories, getPages, getAnnouncementCount }
+export { getAnnouncements, getAnnouncementById, createAnnouncement, updateAnnouncementById, deleteAnnouncementById, getCategories, getPages, getAnnouncementByIdCount }

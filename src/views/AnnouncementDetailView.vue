@@ -84,8 +84,8 @@ const showAlert = () => {
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Page View</div>
-                    <div class="ann-display w-full flex justify-between items-center text-emerald-700">
-                        {{ announcement.announcementView }}
+                    <div class="ann-counter w-full flex justify-between items-center text-emerald-700">
+                        {{ announcement.viewCount }}
                     </div>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 <script setup>
 import { toLocalDate } from "../composables/date";
 import { RouterLink } from "vue-router";
-import { getAnnouncementCount } from "../composables/fetch";
 import { useRouter } from "vue-router";
 const props = defineProps({
     announcement: Object,
@@ -11,10 +10,8 @@ const props = defineProps({
 )
 const router = useRouter()
 const goToDetail = async (id) => {
-    const status = await getAnnouncementCount(id)
     router.push({ name: 'UserAnnouncementDetail', params: { id: id } })
-    console.log(status)
-    console.log(id)
+
 }
 </script>
  
