@@ -44,11 +44,8 @@ const showAlert = () => {
         <div class="w-[95%] ss:w-[90%] sm:w-[80%] md:w-[75%] pt-14 min-h-[72.5vh]">
             <div class="w-full flex flex-col mt-8 pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg relative"
                 v-if="announcement.id !== null && announcement.id !== undefined">
-                <div class="absolute px-4 ss:px-8 md:px-12 pt-10 right-0 text-emerald-700">
-                    <span class="ann-counter">{{ announcement.viewCount }}</span> Views
-                </div>
                 <div class="w-full px-4 ss:px-8 md:px-12 pt-10">
-                    <div class="font-semibold text-2xl pb-2 md:pb-0 ann-title text-center">{{ announcement.announcementTitle
+                    <div class="font-semibold text-2xl pb-2 md:pb-0 ann-title text-center w-[90%] mx-auto ">{{ announcement.announcementTitle
                     }}</div>
                     <div class="opacity-30 font-semibold pt-3 text-xl ann-category text-center">{{
                         announcement.announcementCategory }}</div>

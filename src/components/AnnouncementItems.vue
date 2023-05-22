@@ -22,18 +22,21 @@ defineEmits(['deleteAnnoucement'])
 
         <div :class="index % 2 === 1 ? 'bg-[#e9f4fe]' : 'bg-white'"
             class="hidden md:grid grid-cols-8 lg:grid-cols-9 xl:grid-cols-12 border-gray-400 border-solid border-x-[1px] border-b-[1px] text-lg">
-            <div class="p-4  place-content-center grid self-center">{{ index + 1 }}</div>
-            <div class="ann-title p-4 grid lg:col-span-4 col-span-3 self-center">
+            <div class="p-5  place-content-center grid self-center">{{ index + 1 }}</div>
+            <div class="ann-title p-5 grid lg:col-span-3 col-span-2 self-center">
                 {{ announcement.announcementTitle }}
             </div>
-            <div class="ann-category p-4  self-center grid">{{ announcement.announcementCategory }}</div>
-            <div class=" p-4 self-center xl:grid col-span-3 hidden grid-cols-4">
-                <div class="ann-publish-date col-span-2">{{ toLocalDate(announcement.publishDate) }}</div>
-                <div class="ann-close-date col-span-2"> {{ toLocalDate(announcement.closeDate) }}</div>
+            <div class="ann-category p-5  self-center grid">{{ announcement.announcementCategory }}</div>
+            <div class=" p-5 self-center xl:grid col-span-3 hidden grid-cols-4">
+                <div class="ann-publish-date col-span-2 pr-4">{{ toLocalDate(announcement.publishDate) }}</div>
+                <div class="ann-close-date col-span-2 pr-4"> {{ toLocalDate(announcement.closeDate) }}</div>
             </div>
-            <div class="ann-display p-4  place-content-center grid col-span-1"
+            <div class="ann-display p-5  place-content-center grid col-span-1"
                 :class="announcement.announcementDisplay === 'N' ? 'text-red-700' : 'text-green-700'">
                 {{ announcement.announcementDisplay }}
+            </div>
+            <div class="ann-counter p-5  place-content-center grid col-span-1">
+                {{ announcement.viewCount }}
             </div>
             <div class="flex gap-2 lg:gap-6 justify-center col-span-2 ">
                 <RouterLink :to="{ name: 'AnnouncementDetailView', params: { id: announcement.id } }"

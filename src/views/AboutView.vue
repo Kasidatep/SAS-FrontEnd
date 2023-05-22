@@ -49,7 +49,7 @@ import team from "../assets/data/team.json"
                                         <LogosInstagramIconVue class="w-6 h-6 block" />
                                     </div>
                                     <a class="w-full block h-10 pt-2 text-[#6666ee] text-md truncate">
-                                        <a :href="member.ig" target="_blank">{{ member.ig }}</a>
+                                        <a :href="member.ig" target="_blank">{{ member.ig.slice(12) }}</a>
                                     </a>
                                 </div>
                                 <div class="flex justify-start">
@@ -57,7 +57,7 @@ import team from "../assets/data/team.json"
                                         <LogosLinkedinIconVue class="w-6 h-6 block" />
                                     </div>
                                     <a class="w-full block h-10 pt-2 text-[#6666ee] text-md truncate">
-                                        <a :href="member.ig" target="_blank">{{ member.ln }}</a>
+                                        <a :href="member.ln" target="_blank">{{ member.ln.slice(12) }}</a>
                                     </a>
                                 </div>
                                 <div class="flex justify-start pb-3">
@@ -65,7 +65,7 @@ import team from "../assets/data/team.json"
                                         <LogosGithubIcon class="w-6 h-6 block" />
                                     </div>
                                     <a class="w-full block h-10 pt-2 text-[#6666ee] text-md truncate">
-                                        <a :href="member.ig" target="_blank">{{ member.gh }}</a>
+                                        <a :href="member.gh" target="_blank">{{ member.gh.slice(8) }}</a>
                                     </a>
                                 </div>
 

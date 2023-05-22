@@ -29,27 +29,27 @@ const closeMenu = () => {
                         <RouterLink :to="{ name: 'Home' }"><img src="../assets/sit_logo.png" class="h-12 cursor-pointer" >
                         </RouterLink>
                     </div>
-                    <div class="flex md:hidden text-xl text-white  gap-2 cursor-pointer pl-6 sss:pl-8 ss:pl-10 sm:pl-12 h-full items-center" @click="menuToggle()">
+                    <div class="flex md:hidden text-2xl text-white  cursor-pointer  h-full items-center" @click="menuToggle()">
                         <UisMultiply v-show="isOpen" /> <UisBars v-show="!isOpen"/>
                     </div>
                 </div>
-                <div class="flex flex-col w-full md:w-fit md:flex-row" :class="isOpen?'md:flex flex':'md:flex hidden'">
+                <div class="flex flex-col w-full md:w-fit md:flex-row gap-0 md:gap-6" :class="isOpen?'md:flex flex':'md:flex hidden'">
                     <RouterLink :to="{ name: 'UserAnnouncement' }" @click="closeMenu">
-                        <div class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 mx-2 cursor-pointer md:h-full bg-[#33669950] rounded-md md:bg-[#285481]">
+                        <div class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 cursor-pointer md:h-full bg-[#3399cc] rounded-md md:bg-[#285481]">
                             <MdiAccount></MdiAccount>
                             <div class="">User</div>
                         </div>
                     </RouterLink>
                     <RouterLink :to="{ name: 'AdminAnnouncement' }" @click="closeMenu">
                         <div
-                            class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 mx-2 cursor-pointer md:h-full bg-[#33669950] rounded-md md:bg-[#285481]">
+                            class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2  cursor-pointer md:h-full bg-[#3399cc] rounded-md md:bg-[#285481]">
                             <MdiAccountCog></MdiAccountCog>
                             <div class="">Admin</div>
                         </div>
                     </RouterLink>
                     <RouterLink :to="{ name: 'AboutUs' }" @click="closeMenu">
                         <div
-                            class="text-xl text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 mx-2 cursor-pointer md:h-full bg-[#33669950] rounded-md md:bg-[#285481]">
+                            class="text-xl mb-8 md:mb-0 text-white w-full flex justify-center items-center h-10 my-3 md:my-0 gap-2 px-2 cursor-pointer md:h-full bg-[#3399cc] rounded-md md:bg-[#285481]">
                             <Info></Info>
                             <div>About Us</div>
                         </div>

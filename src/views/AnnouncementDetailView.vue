@@ -39,11 +39,17 @@ const showAlert = () => {
 <template>
     <div class="w-full justify-center flex">
         <div class="w-[95%] ss:w-[90%] sm:w-[80%] md:w-[75%] pt-14 min-h-[72.5vh]">
-            <div class=" items-center flex sm:text-3xl text-2xl font-semibold"
+            <div class=" items-center flex sm:text-3xl text-2xl font-semibold justify-between pb-6 "
                 v-if="announcement.id !== null && announcement.id !== undefined">
-                Annoucement Detail:
+                <div class="h-full ">
+                    Annoucement Detail:
+                </div>
+                <div class="sm:text-lg text-sm sss:text-base flex flex-col w-fit inline bg-slate-200 py-1 px-4 border rounded-lg ">
+                   <span class="ann-counter text-center w-full">{{ announcement.viewCount }}</span><span class="ann-counter text-center w-full">#VIEWS</span>  
+                </div>
             </div>
-            <div class="w-full flex flex-col mt-8 pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg"
+
+            <div class="w-full flex flex-col pb-10 md:text-lg border-gray-500 border-solid border-2 rounded-lg"
                 v-if="announcement.id !== null && announcement.id !== undefined">
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Title</div>
@@ -82,16 +88,11 @@ const showAlert = () => {
                         {{ announcement.announcementDisplay }}
                     </div>
                 </div>
-                <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
-                    <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Page View</div>
-                    <div class="ann-counter w-full flex justify-between items-center text-emerald-700">
-                        {{ announcement.viewCount }}
-                    </div>
-                </div>
             </div>
             <div class="flex gap-6 justify-between ss:justify-start">
                 <div class="py-8 place-content-left w-fit grid text-lg">
-                    <RouterLink :to="{ name: 'AdminAnnouncement' }" v-if="announcement.id !== null && announcement.id !== undefined">
+                    <RouterLink :to="{ name: 'AdminAnnouncement' }"
+                        v-if="announcement.id !== null && announcement.id !== undefined">
                         <div
                             class="ann-button border-red bg-[#3399cc] px-5 py-1 rounded-lg text-white cursor-pointer hover:bg-[#336699] ">
                             Back
