@@ -53,37 +53,37 @@ const showAlert = () => {
                 v-if="announcement.id !== null && announcement.id !== undefined">
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Title</div>
-                    <div class="w-full flex justify-between items-center ann-title">
+                    <div class="w-full items-center ann-title">
                         {{ announcement.announcementTitle }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Category</div>
-                    <div class="w-full flex justify-between items-center ann-category">
+                    <div class="w-full items-center ann-category">
                         {{ announcement.announcementCategory }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Description</div>
-                    <div class="w-full flex justify-between items-center ann-description"
+                    <div class="w-full  items-center ann-description"
                         v-html="announcement.announcementDescription">
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">PublishDate</div>
-                    <div class="w-full flex justify-between items-center ann-publish-date">
+                    <div class="w-full items-center ann-publish-date">
                         {{ toLocalDate(announcement.publishDate) }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">CloseDate</div>
-                    <div class="ann-close-date w-full flex justify-between items-center ">
+                    <div class="ann-close-date w-full items-center ">
                         {{ toLocalDate(announcement.closeDate) }}
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Display</div>
-                    <div class="ann-display w-full flex justify-between items-center "
+                    <div class="ann-display w-full items-center "
                         :class="announcement.announcementDisplay === 'N' ? 'text-red-700' : 'text-green-700'">
                         {{ announcement.announcementDisplay }}
                     </div>
