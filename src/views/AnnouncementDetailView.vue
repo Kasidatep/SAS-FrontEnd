@@ -4,6 +4,7 @@ import { useRoute, useRouter } from "vue-router";
 import { getAnnouncementById } from "../composables/fetch";
 import { toLocalDate } from "../composables/date";
 import Swal from 'sweetalert2'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const route = useRoute()
 const id = route.params.id
@@ -65,8 +66,9 @@ const showAlert = () => {
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
                     <div class="w-40 font-semibold text-lg pb-2 md:pb-0">Description</div>
-                    <div class="w-full  items-center ann-description"
-                        v-html="announcement.announcementDescription">
+                    <div class="w-full items-center ">
+                        <div class="ann-description" v-html="announcement.announcementDescription"></div>
+                
                     </div>
                 </div>
                 <div class="w-full flex flex-col md:flex-row px-4 ss:px-8 md:px-12 pt-5 md:pt-10">
@@ -113,4 +115,7 @@ const showAlert = () => {
     </div>
 </template>
  
-<style scoped></style>
+<style>
+
+
+</style>

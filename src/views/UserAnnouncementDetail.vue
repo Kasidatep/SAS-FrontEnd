@@ -50,9 +50,12 @@ const showAlert = () => {
                     <div class="opacity-30 font-semibold pt-3 text-xl ann-category text-center">{{
                         announcement.announcementCategory }}</div>
                 </div>
-                <div class="w-full px-4 ss:px-8 md:px-12 pt-5 md:pt-10 indent-12">
-                    <div class="w-full ann-description" v-html="announcement.announcementDescription">
+                <div class="w-full items-center px-4 ss:px-8 md:px-12 pt-5 md:pt-10 indent-12">
+                 
+                         <div class="ann-description" v-html="announcement.announcementDescription">
                     </div>
+                    
+                   
                 </div>
                 <div class="px-4 ss:px-8 md:px-12 pt-5 md:pt-10 flex w-full justify-end" v-if="annManage.mode == 'close'">
                     <span class="text-rose-500 pr-2">Closed on:</span><span class=" ann-close-date">{{
@@ -75,4 +78,6 @@ const showAlert = () => {
     </div>
 </template>
  
-<style scoped></style>
+<style scoped>
+
+</style>

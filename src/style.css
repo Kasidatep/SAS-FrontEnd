@@ -6,11 +6,37 @@
     border: red solid 1px;
 }
 
-body{
+body {
     margin: 0;
     font-family: 'Kanit', sans-serif;
 }
 
-.grid-cols-16{
+.grid-cols-16 {
     grid-template-columns: repeat(16, minmax(0, 1fr));
+}
+
+div.ann-description>* {
+    line-height: 125%;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
+}
+
+div.ann-description>ul {
+    list-style-type: inherit;
+    margin-left: 30px;
+}
+
+div.ann-description>ol {
+    list-style-type: decimal;
+    margin-left: 30px;
 }
